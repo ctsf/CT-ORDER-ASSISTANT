@@ -21,8 +21,10 @@ public with sharing class Test_OrderCloneUtility {
         // Verify the cloned Order
         orders__Order__c clonedOrder = [SELECT Id, orders__SalesOrganizationId__c, orders__AccountId__c FROM orders__Order__c WHERE Id = :clonedOrderId];
         System.assertNotEquals(clonedOrder.Id, testOrder.Id, 'Cloned order should have a different ID');
+        System.assertNotEquals(clonedOrder.orders__OrderType__c, testOrder.orders__OrderType__c, 'OrderType should match the original');
         System.assertEquals(clonedOrder.orders__SalesOrganizationId__c, testOrder.orders__SalesOrganizationId__c, 'SalesOrganization should match the original');
         System.assertEquals(clonedOrder.orders__AccountId__c, testOrder.orders__AccountId__c, 'Account should match the original');
+        System.assertEquals(clonedOrder.orders__PriceBookId__c, testOrder.orders__PriceBookId__c, 'PriceBook should match the original');
 
         // Verify the cloned Order Line Items
         List<orders__OrderLineItem__c> clonedOLIs = [

@@ -6,15 +6,19 @@ public with sharing class OrderCloneUtility {
 
         orders__Order__c originalOrder = [
             SELECT  Id, 
+                    orders__OrderType__c,
                     orders__Stage__c,
                     orders__SalesOrganizationId__c,
                     orders__AccountId__c,
-                   (SELECT Id, 
-                           orders__CatalogLineItemId__c,
-                           orders__PriceBookLineItemId__c, 
-                           orders__PriceBookId__c,
-                           orders__Quantity__c,
-                           orders__Product2Id__c
+                    orders__PriceBookId__c,
+                    (SELECT Id, 
+                            orders__CatalogId__c,
+                            orders__PromotionId__c,
+                            orders__CatalogLineItemId__c,
+                            orders__PriceBookLineItemId__c, 
+                            orders__PriceBookId__c,
+                            orders__Quantity__c,
+                            orders__Product2Id__c
                     FROM orders__OrderLineItems__r),
                    (SELECT Id, 
                            Name, 
