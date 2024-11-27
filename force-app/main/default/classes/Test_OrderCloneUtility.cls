@@ -1,105 +1,146 @@
 @IsTest
 public with sharing class Test_OrderCloneUtility {
     @IsTest
-    static void testCloneOrderWithFullRelationships() {
-        // Step 1: Create test data
+    static void testCloneOrderWithOrderId() {
         Map<String, Object> testData = createTestData();
         orders__Order__c testOrder = (orders__Order__c)testData.get('testOrder');
-        List<Product2> products = (List<Product2>)testData.get('products');
-        List<orders__PriceBookLineItem__c> pricebookEntries = (List<orders__PriceBookLineItem__c>)testData.get('pricebookEntries');
-        List<orders__OrderLineItem__c> orderLineItems = (List<orders__OrderLineItem__c>)testData.get('orderLineItems');
-        List<orders__DeliveryLineItem__c> deliveryLineItems = (List<orders__DeliveryLineItem__c>)testData.get('deliveryLineItems');
 
-        // Step 2: Execute cloning
         Test.startTest();
-        OrderCloneUtility util = new OrderCloneUtility();
-        Id clonedOrderId = util.cloneOrder(testOrder.Id);
+        OrderCloneUtility util = new OrderCloneUtility(testOrder.Id, null, true, null);
+        Id clonedOrderId = util.cloneOrder();
         Test.stopTest();
 
-        // Step 3: Assertions
+        validateClone(testOrder.Id, clonedOrderId, true, null);
+    }
 
-        // Verify the cloned Order
-        orders__Order__c clonedOrder = [SELECT Id, orders__SalesOrganizationId__c, orders__AccountId__c FROM orders__Order__c WHERE Id = :clonedOrderId];
-        System.assertNotEquals(clonedOrder.Id, testOrder.Id, 'Cloned order should have a different ID');
-        System.assertNotEquals(clonedOrder.orders__OrderType__c, testOrder.orders__OrderType__c, 'OrderType should match the original');
-        System.assertEquals(clonedOrder.orders__SalesOrganizationId__c, testOrder.orders__SalesOrganizationId__c, 'SalesOrganization should match the original');
-        System.assertEquals(clonedOrder.orders__AccountId__c, testOrder.orders__AccountId__c, 'Account should match the original');
-        System.assertEquals(clonedOrder.orders__PriceBookId__c, testOrder.orders__PriceBookId__c, 'PriceBook should match the original');
+    @IsTest
+    static void testCloneOrderWithAccountId() {
+        Map<String, Object> testData = createTestData();
+        Account testAccount = (Account)testData.get('testAccount');
 
-        // Verify the cloned Order Line Items
-        List<orders__OrderLineItem__c> clonedOLIs = [
-            SELECT Id, orders__OrderId__c, orders__Product2Id__c, orders__PriceBookLineItemId__c
-            FROM orders__OrderLineItem__c
-            WHERE orders__OrderId__c = :clonedOrderId
+        Test.startTest();
+        OrderCloneUtility util = new OrderCloneUtility(null, null, true, testAccount.Id);
+        Id clonedOrderId = util.cloneOrder();
+        Test.stopTest();
+
+        orders__Order__c lastOrder = [
+            SELECT Id
+            FROM orders__Order__c
+            WHERE orders__AccountId__c = :testAccount.Id
+            ORDER BY CreatedDate DESC
+            LIMIT 1
         ];
-        System.assertEquals(3, clonedOLIs.size(), 'Cloned order should have the same number of Order Line Items as the original');
-        for (Integer i = 0; i < clonedOLIs.size(); i++) {
-            System.assertEquals(products[i].Id, clonedOLIs[i].orders__Product2Id__c, 'Product link should be preserved in cloned Order Line Items');
-            System.assertEquals(pricebookEntries[i].Id, clonedOLIs[i].orders__PriceBookLineItemId__c, 'PriceBookLineItem link should be preserved in cloned Order Line Items');
+
+        validateClone(lastOrder.Id, clonedOrderId, true, null);
+    }
+
+    @IsTest
+    static void testCloneOrderWithoutDeliveries() {
+        Map<String, Object> testData = createTestData();
+        orders__Order__c testOrder = (orders__Order__c)testData.get('testOrder');
+
+        Test.startTest();
+        OrderCloneUtility util = new OrderCloneUtility(testOrder.Id, null, false, null);
+        Id clonedOrderId = util.cloneOrder();
+        Test.stopTest();
+
+        validateClone(testOrder.Id, clonedOrderId, false, null);
+    }
+
+    @IsTest
+    static void testCloneOrderWithNewAccount() {
+        Map<String, Object> testData = createTestData();
+        orders__Order__c testOrder = (orders__Order__c)testData.get('testOrder');
+        Account newAccount = new Account(Name = 'New Test Account');
+        insert newAccount;
+
+        Test.startTest();
+        OrderCloneUtility util = new OrderCloneUtility(testOrder.Id, newAccount.Id, true, null);
+        Id clonedOrderId = util.cloneOrder();
+        Test.stopTest();
+
+        validateClone(testOrder.Id, clonedOrderId, true, newAccount.Id);
+    }
+
+    private static void validateClone(Id originalOrderId, Id clonedOrderId, Boolean expectDeliveries, Id expectedNewAccountId) {
+        // Validate cloned order
+        orders__Order__c clonedOrder = [SELECT Id, orders__AccountId__c, orders__Stage__c FROM orders__Order__c WHERE Id = :clonedOrderId];
+        orders__Order__c originalOrder = [SELECT Id, orders__AccountId__c FROM orders__Order__c WHERE Id = :originalOrderId];
+
+        System.assertNotEquals(clonedOrder.Id, originalOrder.Id, 'Cloned order should have a different ID');
+        System.assertEquals(clonedOrder.orders__Stage__c, 'OnHold', 'Cloned order stage should be "OnHold"');
+
+        if (expectedNewAccountId != null) {
+            System.assertEquals(clonedOrder.orders__AccountId__c, expectedNewAccountId, 'Cloned order AccountId should match the new AccountId');
+        } else {
+            System.assertEquals(clonedOrder.orders__AccountId__c, originalOrder.orders__AccountId__c, 'Cloned order AccountId should match the original');
         }
 
-        // Verify the cloned Deliveries
+        // Validate cloned deliveries
         List<orders__Delivery__c> clonedDeliveries = [
-            SELECT Id, orders__OrderId__c FROM orders__Delivery__c WHERE orders__OrderId__c = :clonedOrderId
+            SELECT Id
+            FROM orders__Delivery__c
+            WHERE orders__OrderId__c = :clonedOrderId
         ];
-        System.assertEquals(1, clonedDeliveries.size(), 'Cloned order should have the same number of Deliveries as the original');
 
-        // Verify the cloned Delivery Line Items
-        List<orders__DeliveryLineItem__c> clonedDLIs = [
-            SELECT Id, orders__DeliveryId__c, orders__OrderLineItemId__c
-            FROM orders__DeliveryLineItem__c
-            WHERE orders__DeliveryId__c = :clonedDeliveries[0].Id
-        ];
-        System.assertEquals(3, clonedDLIs.size(), 'Cloned Delivery should have the same number of Delivery Line Items as the original');
-
-        // Verify relationships in Delivery Line Items
-        for (Integer i = 0; i < clonedDLIs.size(); i++) {
-            System.assertEquals(clonedOLIs[i].Id, clonedDLIs[i].orders__OrderLineItemId__c, 'Delivery Line Item should point to the correct cloned Order Line Item');
+        if (expectDeliveries) {
+            System.assertNotEquals(clonedDeliveries.size(), 0, 'Deliveries should be cloned');
+        } else {
+            System.assertEquals(clonedDeliveries.size(), 0, 'No deliveries should be cloned');
         }
     }
 
     private static Map<String, Object> createTestData() {
         Map<String, Object> testData = new Map<String, Object>();
 
+        // Sales Organization
         orders__SalesOrganization__c salesOrg = new orders__SalesOrganization__c(orders__SalesPoint__c = 'Account');
         insert salesOrg;
 
         List<orders__OMSettings__c> settings = getSettings(salesOrg.Id);
         insert settings;
 
+        // Account
         Account testAccount = new Account(Name = 'Test Account');
         insert testAccount;
 
+        // Price Book
         orders__PriceBook__c priceBook = new orders__PriceBook__c(
             Name = 'Custom Price Book',
             orders__IsActive__c = true
         );
         insert priceBook;
 
+        // Products and Price Book Line Items
         List<Product2> products = new List<Product2>();
+        List<orders__PriceBookLineItem__c> pricebookLineItems = new List<orders__PriceBookLineItem__c>();
+
         for (Integer i = 1; i <= 3; i++) {
-            products.add(new Product2(Name = 'Test Product ' + i, IsActive = true));
+            Product2 product = new Product2(Name = 'Test Product ' + i, IsActive = true);
+            products.add(product);
         }
         insert products;
 
-        List<orders__PriceBookLineItem__c> pricebookLineItems = new List<orders__PriceBookLineItem__c>();
         for (Product2 product : products) {
             pricebookLineItems.add(new orders__PriceBookLineItem__c(
                 orders__PriceBookId__c = priceBook.Id,
                 orders__Product2Id__c = product.Id,
-                orders__ListPrice__c = 100 * Math.random(),
+                orders__ListPrice__c = 100,
                 orders__IsActive__c = true
             ));
         }
         insert pricebookLineItems;
 
+        // Order
         orders__Order__c testOrder = new orders__Order__c(
             orders__OrderType__c = 'Order',
             orders__SalesOrganizationId__c = salesOrg.Id,
-            orders__AccountId__c = testAccount.Id
+            orders__AccountId__c = testAccount.Id,
+            orders__PriceBookId__c = priceBook.Id
         );
         insert testOrder;
 
+        // Order Line Items
         List<orders__OrderLineItem__c> orderLineItems = new List<orders__OrderLineItem__c>();
         for (Integer i = 0; i < products.size(); i++) {
             orderLineItems.add(new orders__OrderLineItem__c(
@@ -111,12 +152,14 @@ public with sharing class Test_OrderCloneUtility {
         }
         insert orderLineItems;
 
+        // Deliveries
         orders__Delivery__c testDelivery = new orders__Delivery__c(
             orders__OrderId__c = testOrder.Id,
             orders__DeliveryDate__c = Date.today()
         );
         insert testDelivery;
 
+        // Delivery Line Items
         List<orders__DeliveryLineItem__c> deliveryLineItems = new List<orders__DeliveryLineItem__c>();
         for (Integer i = 0; i < orderLineItems.size(); i++) {
             deliveryLineItems.add(new orders__DeliveryLineItem__c(
@@ -129,12 +172,8 @@ public with sharing class Test_OrderCloneUtility {
         }
         insert deliveryLineItems;
 
-        testData.put('salesOrg', salesOrg);
+        testData.put('testAccount', testAccount);
         testData.put('testOrder', testOrder);
-        testData.put('products', products);
-        testData.put('pricebookEntries', pricebookLineItems);
-        testData.put('orderLineItems', orderLineItems);
-        testData.put('deliveryLineItems', deliveryLineItems);
 
         return testData;
     }

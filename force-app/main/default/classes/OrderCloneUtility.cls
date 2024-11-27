@@ -1,7 +1,23 @@
 public with sharing class OrderCloneUtility {
-    public Id cloneOrder(Id orderId) {
-        if (orderId == null) {
-            return null;
+
+
+    private Id orderId;
+    private Id newAccountId;
+    private Boolean cloneDeliveriesFlag;
+    private Id accountId;
+
+    // Constructor to initialize variables
+    public OrderCloneUtility(Id orderId, Id newAccountId, Boolean cloneDeliveriesFlag, Id accountId) {
+        this.orderId = orderId;
+        this.newAccountId = newAccountId;
+        this.cloneDeliveriesFlag = cloneDeliveriesFlag;
+        this.accountId = accountId;
+    }
+
+    public Id cloneOrder() {
+        Id sourceOrderId = orderId != null ? orderId : getLastOrderForAccount();
+        if (sourceOrderId == null) {
+            throw new IllegalArgumentException('No valid orderId or accountId provided for cloning.');
         }
 
         orders__Order__c originalOrder = [
@@ -36,16 +52,27 @@ public with sharing class OrderCloneUtility {
                             FROM orders__DeliveryLineItems__r)
                     FROM orders__Deliveries__r)
             FROM orders__Order__c
-            WHERE Id = :orderId
+            WHERE Id = :sourceOrderId
             LIMIT 1
         ];
 
+        // Clone the order and replace AccountId if specified
         orders__Order__c clonedOrder = originalOrder.clone(false, true, false, false);
+        if (newAccountId != null) {
+            clonedOrder.orders__AccountId__c = newAccountId;
+        }
+
+        clonedOrder.orders__Stage__c = 'OnHold';
+
         insert clonedOrder;
 
+        // Clone order line items
         Map<Id, Id> orderLineItemIdMap = cloneOrderLineItems(originalOrder.orders__OrderLineItems__r, clonedOrder.Id);
 
-        cloneDeliveries(originalOrder, clonedOrder.Id, orderLineItemIdMap);
+        // Conditionally clone deliveries
+        if (cloneDeliveriesFlag) {
+            cloneDeliveries(originalOrder, clonedOrder.Id, orderLineItemIdMap);
+        }
 
         return clonedOrder.Id;
     }
@@ -86,6 +113,11 @@ public with sharing class OrderCloneUtility {
             for (orders__Delivery__c originalDelivery : originalOrder.orders__Deliveries__r) {
                 orders__Delivery__c clonedDelivery = originalDelivery.clone(false, true, false, false);
                 clonedDelivery.orders__OrderId__c = clonedOrderId;
+
+                if (newAccountId != null) {
+                    clonedDelivery.orders__AccountId__c = newAccountId;
+                }
+
                 clonedDeliveries.add(clonedDelivery);
             }
 
@@ -122,5 +154,22 @@ public with sharing class OrderCloneUtility {
                 }
             }
         }
+    }
+
+    private Id getLastOrderForAccount() {
+        if (accountId == null) {
+            return null;
+        }
+
+        // Query for the last draft order for the given account
+        orders__Order__c lastDraftOrder = [
+            SELECT Id
+            FROM orders__Order__c
+            WHERE orders__AccountId__c = :accountId
+            ORDER BY CreatedDate DESC
+            LIMIT 1
+        ];
+
+        return lastDraftOrder != null ? lastDraftOrder.Id : null;
     }
 }
