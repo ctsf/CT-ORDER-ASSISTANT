@@ -165,11 +165,11 @@ public with sharing class Test_OrderCloneUtility {
 
         orders__OMSettings__c deliveryLineItemMapping = new orders__OMSettings__c();
         deliveryLineItemMapping.RecordTypeId = Schema.SObjectType.orders__OMSettings__c.recordTypeInfosByDeveloperName.get('DeliveryLineItemMapping').recordTypeId;
-        deliveryLineItemMapping.orders__QuantityField__c = 'orders__Quantity__c';
         deliveryLineItemMapping.orders__UnitPriceField__c    = 'orders__UnitPrice__c';
         deliveryLineItemMapping.orders__ListPriceField__c    = 'orders__ListPrice__c';
         deliveryLineItemMapping.orders__TotalPriceField__c    = 'orders__TotalPrice__c';
         deliveryLineItemMapping.orders__TotalDiscountField__c    = 'orders__TotalDiscount__c';
+        deliveryLineItemMapping.orders__QuantityField__c = 'orders__Quantity__c';
         settings.add(deliveryLineItemMapping);
 
         orders__OMSettings__c deliveryMapping = new orders__OMSettings__c();
