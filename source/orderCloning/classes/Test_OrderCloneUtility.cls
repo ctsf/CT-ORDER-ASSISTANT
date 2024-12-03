@@ -6,7 +6,11 @@ public with sharing class Test_OrderCloneUtility {
         orders__Order__c testOrder = (orders__Order__c)testData.get('testOrder');
 
         Test.startTest();
-        OrderCloneUtility util = new OrderCloneUtility(testOrder.Id, null, true, null);
+        OrderCloneUtility util = new OrderCloneUtility()
+            .setOrderId(testOrder.Id)
+            .setIsDeliveriesToBeCloned(true)
+            .setIsDeliveryDatesToBeShifted(true)
+            .setIsQtysToBeCloned(true);
         Id clonedOrderId = util.cloneOrder();
         Test.stopTest();
 
@@ -19,7 +23,9 @@ public with sharing class Test_OrderCloneUtility {
         Account testAccount = (Account)testData.get('testAccount');
 
         Test.startTest();
-        OrderCloneUtility util = new OrderCloneUtility(null, null, true, testAccount.Id);
+        OrderCloneUtility util = new OrderCloneUtility()
+            .setAccountId(testAccount.Id)
+            .setIsDeliveriesToBeCloned(true);
         Id clonedOrderId = util.cloneOrder();
         Test.stopTest();
 
@@ -40,7 +46,9 @@ public with sharing class Test_OrderCloneUtility {
         orders__Order__c testOrder = (orders__Order__c)testData.get('testOrder');
 
         Test.startTest();
-        OrderCloneUtility util = new OrderCloneUtility(testOrder.Id, null, false, null);
+        OrderCloneUtility util = new OrderCloneUtility()
+            .setOrderId(testOrder.Id)
+            .setIsDeliveriesToBeCloned(false);
         Id clonedOrderId = util.cloneOrder();
         Test.stopTest();
 
@@ -55,7 +63,10 @@ public with sharing class Test_OrderCloneUtility {
         insert newAccount;
 
         Test.startTest();
-        OrderCloneUtility util = new OrderCloneUtility(testOrder.Id, newAccount.Id, true, null);
+        OrderCloneUtility util = new OrderCloneUtility()
+            .setOrderId(testOrder.Id)
+            .setNewAccountId(newAccount.Id)
+            .setIsDeliveriesToBeCloned(true);
         Id clonedOrderId = util.cloneOrder();
         Test.stopTest();
 
@@ -63,7 +74,6 @@ public with sharing class Test_OrderCloneUtility {
     }
 
     private static void validateClone(Id originalOrderId, Id clonedOrderId, Boolean expectDeliveries, Id expectedNewAccountId) {
-        // Validate cloned order
         orders__Order__c clonedOrder = [SELECT Id, orders__AccountId__c, orders__Stage__c FROM orders__Order__c WHERE Id = :clonedOrderId];
         orders__Order__c originalOrder = [SELECT Id, orders__AccountId__c FROM orders__Order__c WHERE Id = :originalOrderId];
 
@@ -76,7 +86,6 @@ public with sharing class Test_OrderCloneUtility {
             System.assertEquals(clonedOrder.orders__AccountId__c, originalOrder.orders__AccountId__c, 'Cloned order AccountId should match the original');
         }
 
-        // Validate cloned deliveries
         List<orders__Delivery__c> clonedDeliveries = [
             SELECT Id
             FROM orders__Delivery__c
@@ -87,6 +96,130 @@ public with sharing class Test_OrderCloneUtility {
             System.assertNotEquals(clonedDeliveries.size(), 0, 'Deliveries should be cloned');
         } else {
             System.assertEquals(clonedDeliveries.size(), 0, 'No deliveries should be cloned');
+        }
+    }
+
+    @IsTest
+    static void testCloneOrderWithDateShifting() {
+        Map<String, Object> testData = createTestData();
+        orders__Order__c testOrder = (orders__Order__c)testData.get('testOrder');
+
+        Test.startTest();
+        OrderCloneUtility util = new OrderCloneUtility()
+            .setOrderId(testOrder.Id)
+            .setIsDeliveriesToBeCloned(true)
+            .setIsDeliveryDatesToBeShifted(true);
+        Id clonedOrderId = util.cloneOrder();
+        Test.stopTest();
+
+        validateCloneWithDateShifting(testOrder.Id, clonedOrderId);
+    }
+
+    @IsTest
+    static void testCloneOrderWithoutQuantities() {
+        Map<String, Object> testData = createTestData();
+        orders__Order__c testOrder = (orders__Order__c)testData.get('testOrder');
+
+        Test.startTest();
+        OrderCloneUtility util = new OrderCloneUtility()
+            .setOrderId(testOrder.Id)
+            .setIsDeliveriesToBeCloned(true)
+            .setIsQtysToBeCloned(false);
+        Id clonedOrderId = util.cloneOrder();
+        Test.stopTest();
+
+        validateCloneWithoutQuantities(testOrder.Id, clonedOrderId);
+    }
+
+    @IsTest
+    static void testCloneOrderWithDeliveriesAndQuantities() {
+        Map<String, Object> testData = createTestData();
+        orders__Order__c testOrder = (orders__Order__c)testData.get('testOrder');
+
+        Test.startTest();
+        OrderCloneUtility util = new OrderCloneUtility()
+            .setOrderId(testOrder.Id)
+            .setIsDeliveriesToBeCloned(true)
+            .setIsQtysToBeCloned(true);
+        Id clonedOrderId = util.cloneOrder();
+        Test.stopTest();
+
+        validateCloneWithDeliveriesAndQuantities(testOrder.Id, clonedOrderId);
+    }
+
+    private static void validateCloneWithDateShifting(Id originalOrderId, Id clonedOrderId) {
+        List<orders__Delivery__c> originalDeliveries = [
+            SELECT orders__DeliveryDate__c
+            FROM orders__Delivery__c
+            WHERE orders__OrderId__c = :originalOrderId
+            ORDER BY orders__DeliveryDate__c
+        ];
+        List<orders__Delivery__c> clonedDeliveries = [
+            SELECT orders__DeliveryDate__c
+            FROM orders__Delivery__c
+            WHERE orders__OrderId__c = :clonedOrderId
+            ORDER BY orders__DeliveryDate__c
+        ];
+    
+        System.assertEquals(originalDeliveries.size(), clonedDeliveries.size(), 'Number of deliveries must match');
+    
+        Datetime originalCreatedDatetime = [SELECT CreatedDate FROM orders__Order__c WHERE Id = :originalOrderId].CreatedDate;
+        Datetime clonedCreatedDatetime = [SELECT CreatedDate FROM orders__Order__c WHERE Id = :clonedOrderId].CreatedDate;
+    
+        Date originalCreatedDate = originalCreatedDatetime.date();
+        Date clonedCreatedDate = clonedCreatedDatetime.date();
+    
+        for (Integer i = 0; i < originalDeliveries.size(); i++) {
+            Date originalDeliveryDate = originalDeliveries[i].orders__DeliveryDate__c;
+            Date clonedDeliveryDate = clonedDeliveries[i].orders__DeliveryDate__c;
+    
+            if (i == 0) {
+                Integer interval = originalDeliveryDate.daysBetween(originalCreatedDate);
+                Date expectedClonedDate = clonedCreatedDate.addDays(interval);
+                System.assertEquals(expectedClonedDate, clonedDeliveryDate, 'First delivery date should shift relative to CreatedDate');
+            } else {
+                Integer interval = originalDeliveryDate.daysBetween(originalDeliveries[i - 1].orders__DeliveryDate__c);
+                Date expectedClonedDate = clonedDeliveries[i - 1].orders__DeliveryDate__c.addDays(interval);
+                System.assertEquals(expectedClonedDate, clonedDeliveryDate, 'Delivery date intervals should match');
+            }
+        }
+    }
+    
+
+    private static void validateCloneWithoutQuantities(Id originalOrderId, Id clonedOrderId) {
+        List<orders__OrderLineItem__c> clonedOrderLineItems = [
+            SELECT orders__Quantity__c
+            FROM orders__OrderLineItem__c
+            WHERE orders__OrderId__c = :clonedOrderId
+        ];
+
+        for (orders__OrderLineItem__c clonedLineItem : clonedOrderLineItems) {
+            System.assertEquals(0, clonedLineItem.orders__Quantity__c, 'Cloned order line item quantities should be zero');
+        }
+    }
+
+    private static void validateCloneWithDeliveriesAndQuantities(Id originalOrderId, Id clonedOrderId) {
+        List<orders__Delivery__c> originalDeliveries = [
+            SELECT Id
+            FROM orders__Delivery__c
+            WHERE orders__OrderId__c = :originalOrderId
+        ];
+        List<orders__Delivery__c> clonedDeliveries = [
+            SELECT Id
+            FROM orders__Delivery__c
+            WHERE orders__OrderId__c = :clonedOrderId
+        ];
+
+        System.assertEquals(originalDeliveries.size(), clonedDeliveries.size(), 'Number of deliveries must match');
+
+        List<orders__DeliveryLineItem__c> clonedDeliveryLineItems = [
+            SELECT orders__Quantity__c
+            FROM orders__DeliveryLineItem__c
+            WHERE orders__DeliveryId__c IN :clonedDeliveries
+        ];
+
+        for (orders__DeliveryLineItem__c clonedLineItem : clonedDeliveryLineItems) {
+            System.assert(clonedLineItem.orders__Quantity__c > 0, 'Quantities should be cloned for delivery line items');
         }
     }
 

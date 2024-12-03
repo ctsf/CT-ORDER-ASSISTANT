@@ -1,9 +1,4 @@
 public with sharing class EinsteinAgentOrderClone {
-    // Would you like to have quantities for products in your Order? 
-    // Would you like to have unavailable products replaced with the best alternative? 
-    // Would you like to add recommended products? 
-    // Would you like to recommend quantities to reach the next discount threshold? 
-    // Would you like to include promo-products?
     @InvocableMethod(label='Clone Order' description='Clones an order and its related records.')
     public static List<CloneOrderResponse> cloneOrders(List<CloneOrderRequest> requests) {
         List<CloneOrderResponse> responses = new List<CloneOrderResponse>();
@@ -19,12 +14,13 @@ public with sharing class EinsteinAgentOrderClone {
                     continue;
                 }
 
-                OrderCloneUtility util = new OrderCloneUtility(
-                    String.isNotBlank(request.orderId) ? request.orderId : null,
-                    String.isNotBlank(request.newAccountId) ? request.newAccountId : null,
-                    request.cloneDeliveries,
-                    String.isNotBlank(request.accountId) ? request.accountId : null
-                );
+                OrderCloneUtility util = new OrderCloneUtility()
+                    .setOrderId(request.orderId)
+                    .setAccountId(request.accountId)
+                    .setNewAccountId(request.newAccountId)
+                    .setIsDeliveriesToBeCloned(request.cloneDeliveries)
+                    .setIsDeliveryDatesToBeShifted(request.shiftDeliveryDates)
+                    .setIsQtysToBeCloned(request.cloneQuantities);
 
                 Id clonedOrderId = util.cloneOrder();
 
@@ -50,18 +46,27 @@ public with sharing class EinsteinAgentOrderClone {
 
     public class CloneOrderRequest {
         @InvocableVariable(required=false label='Order ID' description='The ID of the order to clone.')
-        public String orderId;
+        public Id orderId;
 
         @InvocableVariable(required=false label='Account ID' description='The Account ID to use if Order ID is not provided.')
-        public String accountId;
+        public Id accountId;
 
         @InvocableVariable(required=false label='New Account ID' description='The new Account ID to replace in the cloned order.')
-        public String newAccountId;
+        public Id newAccountId;
 
         @InvocableVariable(required=true label='Clone Deliveries' description='Whether to clone the deliveries associated with the order.')
         public Boolean cloneDeliveries;
+
+        @InvocableVariable(required=false label='Shift Delivery Dates' description='Whether to shift delivery dates based on the original intervals.')
+        public Boolean shiftDeliveryDates;
+
+        @InvocableVariable(required=false label='Clone Quantities' description='Whether to clone the quantities in the order.')
+        public Boolean cloneQuantities;
     }
 
+    /**
+     * Output class for CloneOrderResponse.
+     */
     public class CloneOrderResponse {
         @InvocableVariable(label='Status' description='The status of the cloning operation.')
         public String status;
