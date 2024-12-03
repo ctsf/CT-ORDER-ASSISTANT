@@ -12,7 +12,9 @@ This repository contains a Salesforce project that enables order cloning functio
 2. Installed and accesable OrderModule package.
 
 ## Documentation
-Documentation for creating scratch with Einstein functionality configured can be found by [link](https://confluence.customertimes.com/display/CTTraining/Einstein+Agentforce+actions)  
+Prompts for configuring Topic and Actions are [here](prompts.md).
+
+Documentation for creating scratch with Einstein functionality configured can be found by [link](https://confluence.customertimes.com/display/CTTraining/Einstein+Agentforce+actions).  
 
 ## Links
 
