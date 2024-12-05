@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <aiPluginUtterances>
+        <developerName>Cloneorder0</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>Clone order</masterLabel>
+        <utterance>Clone order</utterance>
+    </aiPluginUtterances>
+    <aiPluginUtterances>
+        <developerName>clonethiso1</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>clonethiso</masterLabel>
+        <utterance>clone this order without deliveries</utterance>
+    </aiPluginUtterances>
+    <aiPluginUtterances>
+        <developerName>cloneorder2</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>cloneorder</masterLabel>
+        <utterance>clone order from account to other account</utterance>
+    </aiPluginUtterances>
+    <description>This topic handles the cloning of CT Orders and their related records. It processes user requests such as duplicating an existing order, transferring it to a new account, cloning associated deliveries, adjusting delivery dates, and managing product quantities or promotions during the cloning process. Users typically request to replicate orders with specific customizations or business rules.</description>
+    <developerName>OrderModuleAssistant</developerName>
+    <genAiFunctions>
+        <functionName>EmployeeCopilot__GetRecordDetails</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>EmployeeCopilot__IdentifyObjectByName</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>EmployeeCopilot__IdentifyRecordByName</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>EmployeeCopilot__QueryRecords</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>Clone_Order_V2</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>Never ask two or more questions at a time!</description>
+        <developerName>instruction_neverasktw0</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_neverasktw0</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Do not ask to copy quantities if deliveries are not set to be cloned; quantities are only relevant when deliveries are included</description>
+        <developerName>instruction_donotaskto1</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_donotaskto1</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>If the user mentions an account but no specific order, ask for the accountId and confirm if the latest order for that account should be cloned</description>
+        <developerName>instruction_iftheuserm2</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_iftheuserm2</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>If the user wants to clone deliveries, proceed to gather additional details. If not, proceed directly to clone the base order.</description>
+        <developerName>instruction_iftheuserw3</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_iftheuserw3</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Ask if the user wants to copy the quantities from the original deliveries</description>
+        <developerName>instruction_askiftheus4</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_askiftheus4</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Inform the user about what will happen based on their inputs before running the action</description>
+        <developerName>instruction_informtheu5</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_informtheu5</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>If user want to clone deliveries, always ask if we need to shift dates</description>
+        <developerName>instruction_ifuserwant6</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_ifuserwant6</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>OrderModuleAssistant</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is only to process requests related to cloning orders and their associated records in Salesforce. This includes duplicating orders, transferring them to a new account if specified, managing the inclusion or exclusion of deliveries, adjusting delivery schedules, and optionally modifying product quantities or promotions during the cloning process. Your sole focus is to ensure accurate and efficient execution of these order duplication tasks.</scope>
+</GenAiPlugin>
