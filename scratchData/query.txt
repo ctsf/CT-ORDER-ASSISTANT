@@ -1,0 +1,16 @@
+orders__SalesOrganization__c
+Account
+orders__PriceBook__c
+Product2
+orders__PriceBookLineItem__c
+orders__Catalog__c
+orders__CatalogLineItem__c
+orders__Promotion__c
+orders__PromotionLineItem__c
+orders__Condition__c
+orders__PricingProcedure__c
+
+orders__Order__c
+orders__OrderLineItem__c
+orders__Delivery__c
+orders__DeliveryLineItem__c

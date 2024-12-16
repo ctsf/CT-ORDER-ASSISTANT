@@ -1,7 +1,6 @@
 public with sharing class OrderCloneUtility {
 
     private Id orderId;
-    private Id accountId;
     private Id newAccountId;
 
     private Boolean isDeliveriesToBeCloned = true;
@@ -15,11 +14,6 @@ public with sharing class OrderCloneUtility {
 
     public OrderCloneUtility setNewAccountId(Id newAccountId) {
         this.newAccountId = newAccountId;
-        return this;
-    }
-
-    public OrderCloneUtility setAccountId(Id accountId) {
-        this.accountId = accountId;
         return this;
     }
 
@@ -39,7 +33,7 @@ public with sharing class OrderCloneUtility {
     }
 
     public Id cloneOrder() {
-        Id sourceOrderId = orderId != null ? orderId : getLastOrderForAccount();
+        Id sourceOrderId = orderId;
         if (sourceOrderId == null) {
             throw new IllegalArgumentException('No valid orderId or accountId provided for cloning.');
         }
@@ -210,22 +204,5 @@ public with sharing class OrderCloneUtility {
                 }
             }
         }
-    }
-    
-    
-    private Id getLastOrderForAccount() {
-        if (accountId == null) {
-            return null;
-        }
-
-        orders__Order__c lastDraftOrder = [
-            SELECT Id
-            FROM orders__Order__c
-            WHERE orders__AccountId__c = :accountId
-            ORDER BY CreatedDate DESC
-            LIMIT 1
-        ];
-
-        return lastDraftOrder != null ? lastDraftOrder.Id : null;
     }
 }
