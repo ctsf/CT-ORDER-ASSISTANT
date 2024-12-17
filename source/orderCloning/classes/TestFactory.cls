@@ -144,8 +144,8 @@ public with sharing class TestFactory {
 
         orders__OMSettings__c layoutOrderLineItem = new orders__OMSettings__c();
         layoutOrderLineItem.RecordTypeId = Schema.SObjectType.orders__OMSettings__c.recordTypeInfosByDeveloperName.get('LayoutSetting').recordTypeId;
-        layoutOrderLineItem.orders__FieldsToDisplay__c = 'orders__ListPrice__c,orders__UnitPrice__c,orders__TotalPrice__c,orders__TotalDiscount__c';
         layoutOrderLineItem.orders__Object__c = 'orders__OrderLineItem__c';
+        layoutOrderLineItem.orders__FieldsToDisplay__c = 'orders__ListPrice__c,orders__UnitPrice__c,orders__TotalPrice__c,orders__TotalDiscount__c';
         layoutOrderLineItem.orders__DisplayedFieldWidth__c = '50,30,20,0,15,5';
         settings.add(layoutOrderLineItem);
 
