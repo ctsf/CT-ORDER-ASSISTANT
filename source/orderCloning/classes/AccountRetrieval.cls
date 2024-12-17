@@ -21,6 +21,7 @@ public with sharing class AccountRetrieval {
                 if (accounts.isEmpty()) {
                     response.status = 'SUCCESS';
                     response.message = 'No accounts found for the given partial name.';
+                    response.accounts = new List<Account>();
                 } else {
                     response.status = 'SUCCESS';
                     response.message = 'Accounts retrieved successfully.';

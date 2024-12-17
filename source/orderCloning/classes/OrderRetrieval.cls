@@ -31,6 +31,7 @@ public with sharing class OrderRetrieval {
                 if (orders.isEmpty()) {
                     response.status = 'SUCCESS';
                     response.message = 'No orders found for the given criteria.';
+                    response.orders = new List<orders__Order__c>();
                 } else {
                     response.status = 'SUCCESS';
                     response.message = 'Orders retrieved successfully.';
