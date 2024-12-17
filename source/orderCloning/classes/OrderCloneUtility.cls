@@ -7,6 +7,9 @@ public with sharing class OrderCloneUtility {
     private Boolean isDeliveryDatesToBeShifted = true;
     private Boolean isQtysToBeCloned = true;
 
+    private List<Id> promotionsToAdd = new List<Id>();
+    private Map<Id, Id> productsToRepalce = new Map<Id, Id>();
+
     public OrderCloneUtility setOrderId(Id orderId) {
         this.orderId = orderId;
         return this;
@@ -50,7 +53,7 @@ public with sharing class OrderCloneUtility {
                            orders__Product2Id__c
                     FROM orders__OrderLineItems__r),
                    (SELECT Id, Name, orders__DeliveryDate__c,
-                           (SELECT Id, orders__Quantity__c, orders__Product2Id__c
+                           (SELECT Id, orders__Quantity__c, orders__Product2Id__c, orders__OrderLineItemId__c
                             FROM orders__DeliveryLineItems__r)
                     FROM orders__Deliveries__r)
             FROM orders__Order__c
