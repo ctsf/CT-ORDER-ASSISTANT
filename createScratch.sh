@@ -8,9 +8,6 @@ yes | sf package install -p 04tKc0000004djU -w 30 -o "$scratchName"
 
 sf project deploy start -o "$scratchName"
 
-# TODO: generate test data
-sf apex run -f ./config/CreateSettings.apex -o "$scratchName"
-
 echo "Scratch org was created!"
 echo "Do you want to open it in browser? Please answer yes or no."
 

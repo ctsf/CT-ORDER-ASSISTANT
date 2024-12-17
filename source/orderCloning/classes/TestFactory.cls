@@ -142,15 +142,6 @@ public with sharing class TestFactory {
         layoutDelivery.orders__Object__c = 'orders__Delivery__c';
         settings.add(layoutDelivery);
 
-        orders__OMSettings__c sdkSettings = new orders__OMSettings__c();
-        sdkSettings.RecordTypeId = Schema.SObjectType.orders__OMSettings__c.recordTypeInfosByDeveloperName.get('SDKSetting').recordTypeId;
-        sdkSettings.orders__Platform__c = 'Salesforce';
-        sdkSettings.orders__SDKType__c = 'updateDataOnAfterOrderLineItemUpsert';
-        sdkSettings.orders__Version__c = 'v1';
-        sdkSettings.orders__Parameters__c = '[{"objectName":"orders__Order__c","fields":["orders__Accountid__c","orders__TotalDiscount__c","orders__TotalPrice__c"]},{"objectName":"orders__Delivery__c","fields":["orders__TotalDiscount__c","orders__TotalPrice__c"]},{"objectName":"orders__OrderLineItem__c","fields":["$.unitPrice","orders__TotalDiscount__c","orders__ListPrice__c","orders__First__c","orders__Last__c","orders__TotalPrice__c"]},{"objectName":"orders__DeliveryLineItem__c","fields":["orders__listprice__c","$.unitPrice","orders__TotalDiscount__c","orders__TotalPrice__c"]}]';
-        sdkSettings.orders__Implementation__c = 'SDKCalculateDiscount.setUnitPriceAsListPrice';
-        settings.add(sdkSettings);
-
         orders__OMSettings__c layoutOrderLineItem = new orders__OMSettings__c();
         layoutOrderLineItem.RecordTypeId = Schema.SObjectType.orders__OMSettings__c.recordTypeInfosByDeveloperName.get('LayoutSetting').recordTypeId;
         layoutOrderLineItem.orders__FieldsToDisplay__c = 'orders__ListPrice__c,orders__UnitPrice__c,orders__TotalPrice__c,orders__TotalDiscount__c';
