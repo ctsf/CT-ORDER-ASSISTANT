@@ -7,16 +7,15 @@ public with sharing class EinsteinAgentOrderClone {
             CloneOrderResponse response = new CloneOrderResponse();
 
             try {
-                if (String.isBlank(request.orderId) && String.isBlank(request.accountId)) {
+                if (String.isBlank(request.orderId)) {
                     response.status = 'ERROR';
-                    response.message = 'Either Order ID or Account ID must be provided.';
+                    response.message = 'Order ID must be provided.';
                     responses.add(response);
                     continue;
                 }
 
                 OrderCloneUtility util = new OrderCloneUtility()
                     .setOrderId(request.orderId)
-                    .setAccountId(request.accountId)
                     .setNewAccountId(request.newAccountId)
                     .setIsDeliveriesToBeCloned(request.cloneDeliveries)
                     .setIsDeliveryDatesToBeShifted(request.shiftDeliveryDates)
@@ -48,9 +47,6 @@ public with sharing class EinsteinAgentOrderClone {
         @InvocableVariable(required=false label='Order ID' description='The ID of the order to clone.')
         public Id orderId;
 
-        @InvocableVariable(required=false label='Account ID' description='The Account ID to use if Order ID is not provided.')
-        public Id accountId;
-
         @InvocableVariable(required=false label='New Account ID' description='The new Account ID to replace in the cloned order.')
         public Id newAccountId;
 
@@ -64,9 +60,6 @@ public with sharing class EinsteinAgentOrderClone {
         public Boolean cloneQuantities;
     }
 
-    /**
-     * Output class for CloneOrderResponse.
-     */
     public class CloneOrderResponse {
         @InvocableVariable(label='Status' description='The status of the cloning operation.')
         public String status;
