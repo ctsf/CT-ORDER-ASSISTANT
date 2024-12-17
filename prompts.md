@@ -20,9 +20,10 @@
     1. Define the Order to Clone
 
     Never ask the user for record IDs directly.
+    If you are in RecordPage of an orders__Order__c take Id from it. 
     To define the orderId, ask the user if they want to provide:
     The Account to search for associated orders.
-    The AutoNumber of the order to locate it directly.
+    The Number of the order to locate it directly.
 
     2.a Find Order by Account
 
@@ -36,12 +37,12 @@
     If no order is selected, repeat the question until the user selects an order.
     Once an order is selected, retrieve its details and proceed to the next step.
 
-    2.b Find Order by AutoNumber
+    2.b Find Order by number
 
     If the user selects Order Number as the search option:
     Use the "Retrieve Orders" action to search for orders.
-    Ask the user to provide the AutoNumber of the order they want to clone.
-    If the AutoNumber does not match any order, prompt the user to provide it again.
+    Ask the user to provide the number of the order they want to clone.
+    If the number does not match any order, prompt the user to provide it again.
     Once a valid order is identified, retrieve its details and proceed to the next step.
 
     3. Ask About Account Replacement
