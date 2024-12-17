@@ -73,7 +73,7 @@ public with sharing class OrderRetrieval {
         }
     
         if (!Schema.sObjectType.orders__Order__c.isAccessible()) {
-            throw new IllegalArgumentException('Insufficient permissions to access Order records.');
+            throw new Metadata.NoAccessException('Insufficient permissions to access Order records.');
         }
     
         List<orders__Order__c> orders = [
@@ -93,7 +93,7 @@ public with sharing class OrderRetrieval {
         }
 
         if (!Schema.sObjectType.orders__Order__c.isAccessible()) {
-            throw new IllegalArgumentException('Insufficient permissions to access Order records.');
+            throw new Metadata.NoAccessException('Insufficient permissions to access Order records.');
         }
 
         return [
@@ -111,7 +111,7 @@ public with sharing class OrderRetrieval {
         }
 
         if (!Schema.sObjectType.orders__Order__c.isAccessible()) {
-            throw new IllegalArgumentException('Insufficient permissions to access Order records.');
+            throw new Metadata.NoAccessException('Insufficient permissions to access Order records.');
         }
 
         List<orders__Order__c> orders = [

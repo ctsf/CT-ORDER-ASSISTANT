@@ -60,7 +60,7 @@ public with sharing class AccountRetrieval {
         }
        
         if (!Schema.sObjectType.Account.isAccessible()) {
-            throw new IllegalArgumentException('Insufficient permissions to access Account records.');
+            throw new Metadata.NoAccessException('Insufficient permissions to access Account records.');
         }
 
         String searchPattern = '%' + partialName + '%';
