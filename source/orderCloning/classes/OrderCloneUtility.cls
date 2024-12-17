@@ -120,7 +120,7 @@ public with sharing class OrderCloneUtility {
         Map<Id, Id> deliveryIdMap = new Map<Id, Id>();
 
         if (originalOrder.orders__Deliveries__r != null && !originalOrder.orders__Deliveries__r.isEmpty()) {
-            Date newBaseDate = clonedOrder.CreatedDate.date(); // New order's created date
+            Date newBaseDate = clonedOrder.CreatedDate != null ? clonedOrder.CreatedDate.date() : Date.today();
             Date previousOriginalDate = null;
             Date previousNewDate = newBaseDate;
 
