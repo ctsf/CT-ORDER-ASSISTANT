@@ -108,11 +108,11 @@ public with sharing class OrderClone {
     }
 
     public Id cloneOrder() {
-        if (!Schema.getGlobalDescribe().containsKey('orders__Order__c')) {
-            throw new Metadata.NoAccessException('Object orders__Order__c does not exist in the organization.');
-        }
+        String orderObjectName = 'orders__Order__c';
 
-        if (!Schema.sObjectType.orders__Order__c.isAccessible()) {
+        Schema.DescribeSObjectResult orderDescribe = Metadata.getDescribe(orderObjectName);
+
+        if (!orderDescribe.isAccessible()) {
             throw new Metadata.NoAccessException('Insufficient permissions to access Order records.');
         }
 
@@ -135,7 +135,7 @@ public with sharing class OrderClone {
 
         SObject originalOrder = orderResults[0];
 
-        if (!Schema.sObjectType.orders__Order__c.isCreateable()) {
+        if (!orderDescribe.isCreateable()) {
             throw new Metadata.NoAccessException('Insufficient permissions to create Order records.');
         }
 
@@ -159,7 +159,9 @@ public with sharing class OrderClone {
     }
 
     private Map<Id, Id> cloneOrderLineItems(List<SObject> originalOrderLineItems, Id clonedOrderId) {
-        if (!Schema.sObjectType.orders__OrderLineItem__c.isCreateable()) {
+        String orderLineItemObjectName = 'orders__OrderLineItem__c';
+
+        if (!Metadata.getDescribe(orderLineItemObjectName).isCreateable()) {
             throw new Metadata.NoAccessException('Insufficient permissions to create OrderLineItem records.');
         }
 
@@ -185,7 +187,10 @@ public with sharing class OrderClone {
     }
 
     private void cloneDeliveries(SObject originalOrder, SObject clonedOrder, Map<Id, Id> orderLineItemIdMap) {
-        if (!Schema.sObjectType.orders__Delivery__c.isCreateable() || !Schema.sObjectType.orders__DeliveryLineItem__c.isCreateable()) {
+        String deliveryObjectName = 'orders__Delivery__c';
+        String deliveryLineItemObjectName = 'orders__DeliveryLineItem__c';
+
+        if (!Metadata.getDescribe(deliveryObjectName).isCreateable() || !Metadata.getDescribe(deliveryLineItemObjectName).isCreateable()) {
             throw new Metadata.NoAccessException('Insufficient permissions to create Delivery or DeliveryLineItem records.');
         }
 
