@@ -3,11 +3,11 @@ public with sharing class Test_OrderRetrieval {
     @IsTest
     static void testRetrieveOrdersWithAutoNumber() {
         Map<String, Object> testData = TestFactory.createTestData();
-        orders__Order__c testOrder = (orders__Order__c) testData.get('testOrder');
-        
+        SObject testOrder = (SObject) testData.get('testOrder');
+
         OrderRetrieval.OrderRetrievalRequest request = new OrderRetrieval.OrderRetrievalRequest();
-        testOrder = [SELECT Id, Name FROM orders__Order__c WHERE Id = :testOrder.Id LIMIT 1];
-        request.autoNumber = testOrder.Name; 
+        String orderAutoNumber = (String) testOrder.get('Name');
+        request.autoNumber = orderAutoNumber;
 
         List<OrderRetrieval.OrderRetrievalRequest> requests = new List<OrderRetrieval.OrderRetrievalRequest>{request};
 
@@ -19,13 +19,13 @@ public with sharing class Test_OrderRetrieval {
         System.assertEquals('SUCCESS', responses[0].status, 'The response status should be SUCCESS.');
         System.assertNotEquals(null, responses[0].orders, 'Orders list should not be null.');
         System.assertEquals(1, responses[0].orders.size(), 'One order should be returned.');
-        System.assertEquals(testOrder.Id, responses[0].orders[0].Id, 'The returned order ID should match the test order.');
+        System.assertEquals(testOrder.get('Id'), responses[0].orders[0].get('Id'), 'The returned order ID should match the test order.');
     }
 
     @IsTest
     static void testRetrieveOrdersWithInvalidAutoNumber() {
         OrderRetrieval.OrderRetrievalRequest request = new OrderRetrieval.OrderRetrievalRequest();
-        request.autoNumber = 'InvalidAutoNumber123'; 
+        request.autoNumber = 'InvalidAutoNumber123';
 
         List<OrderRetrieval.OrderRetrievalRequest> requests = new List<OrderRetrieval.OrderRetrievalRequest>{request};
 
@@ -59,11 +59,11 @@ public with sharing class Test_OrderRetrieval {
     @IsTest
     static void testRetrieveOrdersWithAccountId() {
         Map<String, Object> testData = TestFactory.createTestData();
-        Account testAccount = (Account) testData.get('testAccount');
-        orders__Order__c testOrder = (orders__Order__c) testData.get('testOrder');
+        SObject testAccount = (SObject) testData.get('testAccount');
+        SObject testOrder = (SObject) testData.get('testOrder');
 
         OrderRetrieval.OrderRetrievalRequest request = new OrderRetrieval.OrderRetrievalRequest();
-        request.accountId = testAccount.Id;
+        request.accountId = (Id) testAccount.get('Id');
 
         List<OrderRetrieval.OrderRetrievalRequest> requests = new List<OrderRetrieval.OrderRetrievalRequest>{request};
 
@@ -75,7 +75,7 @@ public with sharing class Test_OrderRetrieval {
         System.assertEquals('SUCCESS', responses[0].status, 'The response status should be SUCCESS.');
         System.assertNotEquals(null, responses[0].orders, 'Orders list should not be null.');
         System.assertEquals(1, responses[0].orders.size(), 'One order should be returned for the account.');
-        System.assertEquals(testOrder.Id, responses[0].orders[0].Id, 'The returned order ID should match the test order.');
-        System.assertEquals(testAccount.Id, responses[0].orders[0].orders__AccountId__c, 'The order should belong to the correct account.');
+        System.assertEquals(testOrder.get('Id'), responses[0].orders[0].get('Id'), 'The returned order ID should match the test order.');
+        System.assertEquals(testAccount.get('Id'), responses[0].orders[0].get('orders__AccountId__c'), 'The order should belong to the correct account.');
     }
 }

@@ -1,4 +1,5 @@
 public with sharing class OrderRetrieval {
+
     @InvocableMethod(label='Retrieve Orders' description='Retrieve orders by AutoNumber or Account ID.')
     public static List<OrderRetrievalResponse> retrieveOrders(List<OrderRetrievalRequest> requests) {
         List<OrderRetrievalResponse> responses = new List<OrderRetrievalResponse>();
@@ -14,28 +15,28 @@ public with sharing class OrderRetrieval {
                     continue;
                 }
 
-                List<orders__Order__c> orders;
+                List<SObject> orders;
 
                 if (!String.isBlank(request.autoNumber)) {
-                    orders = new List<orders__Order__c>();
-                    orders__Order__c order = getOrderByAutoNumber(request.autoNumber);
+                    orders = new List<SObject>();
+                    SObject order = getOrderByAutoNumber(request.autoNumber);
                     if (order != null) {
                         orders.add(order);
                     }
                 } else if (request.accountId != null) {
                     orders = getOrdersByAccount(request.accountId);
                 } else {
-                    orders = new List<orders__Order__c>();
+                    orders = new List<SObject>();
                 }
 
                 if (orders.isEmpty()) {
                     response.status = 'SUCCESS';
                     response.message = 'No orders found for the given criteria.';
-                    response.orders = new List<orders__Order__c>();
+                    response.orders = new List<SObject>();
                 } else {
                     response.status = 'SUCCESS';
                     response.message = 'Orders retrieved successfully.';
-                    response.orders = new List<orders__Order__c>();
+                    response.orders = new List<SObject>();
                     response.orders.addAll(orders);
                 }
             } catch (Exception e) {
@@ -65,63 +66,54 @@ public with sharing class OrderRetrieval {
         public String message;
 
         @InvocableVariable(label='Orders' description='The list of retrieved orders.')
-        public List<orders__Order__c> orders;
+        public List<SObject> orders;
     }
 
-    public static orders__Order__c getOrderByAutoNumber(String autoNumber) {
+    public static SObject getOrderByAutoNumber(String autoNumber) {
         if (String.isBlank(autoNumber)) {
             throw new IllegalArgumentException('AutoNumber cannot be null or empty.');
         }
-    
-        if (!Schema.sObjectType.orders__Order__c.isAccessible()) {
+
+        Schema.DescribeSObjectResult orderDescribe = Metadata.getDescribe('orders__Order__c');
+        if (!orderDescribe.isAccessible()) {
             throw new Metadata.NoAccessException('Insufficient permissions to access Order records.');
         }
-    
-        List<orders__Order__c> orders = [
-            SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate
-            FROM orders__Order__c
-            WHERE Name LIKE :('%' + autoNumber)
-            ORDER BY CreatedDate DESC
-            LIMIT 1
-        ];
-    
+
+        String query = 'SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate ' +
+                       'FROM orders__Order__c WHERE Name LIKE :autoNumber ORDER BY CreatedDate DESC LIMIT 1';
+        List<SObject> orders = Database.query(query);
+
         return orders.isEmpty() ? null : orders[0];
     }
-    
-    public static List<orders__Order__c> getOrdersByAccount(Id accountId) {
+
+    public static List<SObject> getOrdersByAccount(Id accountId) {
         if (accountId == null) {
             throw new IllegalArgumentException('Account ID cannot be null.');
         }
 
-        if (!Schema.sObjectType.orders__Order__c.isAccessible()) {
+        Schema.DescribeSObjectResult orderDescribe = Metadata.getDescribe('orders__Order__c');
+        if (!orderDescribe.isAccessible()) {
             throw new Metadata.NoAccessException('Insufficient permissions to access Order records.');
         }
 
-        return [
-            SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate
-            FROM orders__Order__c
-            WHERE orders__AccountId__c = :accountId
-            ORDER BY CreatedDate DESC
-        ];
+        String query = 'SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate ' +
+                       'FROM orders__Order__c WHERE orders__AccountId__c = :accountId ORDER BY CreatedDate DESC';
+        return Database.query(query);
     }
 
-
-    public static orders__Order__c getMostRecentOrderByAccount(Id accountId) {
+    public static SObject getMostRecentOrderByAccount(Id accountId) {
         if (accountId == null) {
             throw new IllegalArgumentException('Account ID cannot be null.');
         }
 
-        if (!Schema.sObjectType.orders__Order__c.isAccessible()) {
+        Schema.DescribeSObjectResult orderDescribe = Metadata.getDescribe('orders__Order__c');
+        if (!orderDescribe.isAccessible()) {
             throw new Metadata.NoAccessException('Insufficient permissions to access Order records.');
         }
 
-        List<orders__Order__c> orders = [
-            SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate
-            FROM orders__Order__c
-            WHERE orders__AccountId__c = :accountId
-            ORDER BY CreatedDate DESC
-            LIMIT 1
-        ];
+        String query = 'SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate ' +
+                       'FROM orders__Order__c WHERE orders__AccountId__c = :accountId ORDER BY CreatedDate DESC LIMIT 1';
+        List<SObject> orders = Database.query(query);
 
         return orders.isEmpty() ? null : orders[0];
     }

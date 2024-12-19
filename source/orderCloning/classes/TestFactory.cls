@@ -96,65 +96,68 @@ public with sharing class TestFactory {
     public static List<SObject> getSettings(Id salesOrgId) {
         List<SObject> settings = new List<SObject>();
         String omSettingsObjectName = 'orders__OMSettings__c';
-
+    
+        Map<String, Schema.RecordTypeInfo> recordTypeInfoMap = Metadata.getDescribe(omSettingsObjectName).getRecordTypeInfosByDeveloperName();
+    
         SObject objectSetting = GLOBAL_DESCRIBE.get(omSettingsObjectName).newSObject(null, true);
-        objectSetting.put('RecordTypeId', Schema.SObjectType.orders__OMSettings__c.recordTypeInfosByDeveloperName.get('ObjectSetting').recordTypeId);
+        objectSetting.put('RecordTypeId', recordTypeInfoMap.get('ObjectSetting').getRecordTypeId());
         objectSetting.put('orders__ProductObject__c', 'Product2');
         objectSetting.put('orders__ProductComponentObject__c', 'User');
         objectSetting.put('orders__AddressObject__c', 'Account');
         objectSetting.put('orders__SKUField__c', 'IsActive');
         settings.add(objectSetting);
-
+    
         SObject orderMapping = GLOBAL_DESCRIBE.get(omSettingsObjectName).newSObject(null, true);
-        orderMapping.put('RecordTypeId', Schema.SObjectType.orders__OMSettings__c.recordTypeInfosByDeveloperName.get('OrderMapping').recordTypeId);
+        orderMapping.put('RecordTypeId', recordTypeInfoMap.get('OrderMapping').getRecordTypeId());
         orderMapping.put('orders__TotalPriceField__c', 'orders__TotalPrice__c');
         orderMapping.put('orders__TotalDiscountField__c', 'orders__TotalDiscount__c');
         settings.add(orderMapping);
-
+    
         SObject orderLineItemMapping = GLOBAL_DESCRIBE.get(omSettingsObjectName).newSObject(null, true);
-        orderLineItemMapping.put('RecordTypeId', Schema.SObjectType.orders__OMSettings__c.recordTypeInfosByDeveloperName.get('OrderLineItemMapping').recordTypeId);
+        orderLineItemMapping.put('RecordTypeId', recordTypeInfoMap.get('OrderLineItemMapping').getRecordTypeId());
         orderLineItemMapping.put('orders__ListPriceField__c', 'orders__ListPrice__c');
         orderLineItemMapping.put('orders__UnitPriceField__c', 'orders__UnitPrice__c');
         orderLineItemMapping.put('orders__TotalPriceField__c', 'orders__TotalPrice__c');
         orderLineItemMapping.put('orders__TotalDiscountField__c', 'orders__TotalDiscount__c');
         orderLineItemMapping.put('orders__QuantityField__c', 'orders__Quantity__c');
         settings.add(orderLineItemMapping);
-
+    
         SObject deliveryLineItemMapping = GLOBAL_DESCRIBE.get(omSettingsObjectName).newSObject(null, true);
-        deliveryLineItemMapping.put('RecordTypeId', Schema.SObjectType.orders__OMSettings__c.recordTypeInfosByDeveloperName.get('DeliveryLineItemMapping').recordTypeId);
+        deliveryLineItemMapping.put('RecordTypeId', recordTypeInfoMap.get('DeliveryLineItemMapping').getRecordTypeId());
         deliveryLineItemMapping.put('orders__UnitPriceField__c', 'orders__UnitPrice__c');
         deliveryLineItemMapping.put('orders__ListPriceField__c', 'orders__ListPrice__c');
         deliveryLineItemMapping.put('orders__TotalPriceField__c', 'orders__TotalPrice__c');
         deliveryLineItemMapping.put('orders__TotalDiscountField__c', 'orders__TotalDiscount__c');
         deliveryLineItemMapping.put('orders__QuantityField__c', 'orders__Quantity__c');
         settings.add(deliveryLineItemMapping);
-
+    
         SObject deliveryMapping = GLOBAL_DESCRIBE.get(omSettingsObjectName).newSObject(null, true);
-        deliveryMapping.put('RecordTypeId', Schema.SObjectType.orders__OMSettings__c.recordTypeInfosByDeveloperName.get('DeliveryMapping').recordTypeId);
+        deliveryMapping.put('RecordTypeId', recordTypeInfoMap.get('DeliveryMapping').getRecordTypeId());
         deliveryMapping.put('orders__TotalPriceField__c', 'orders__TotalPrice__c');
         deliveryMapping.put('orders__TotalDiscountField__c', 'orders__TotalDiscount__c');
         settings.add(deliveryMapping);
-
+    
         SObject addressMapping = GLOBAL_DESCRIBE.get(omSettingsObjectName).newSObject(null, true);
-        addressMapping.put('RecordTypeId', Schema.SObjectType.orders__OMSettings__c.recordTypeInfosByDeveloperName.get('AddressSetting').recordTypeId);
+        addressMapping.put('RecordTypeId', recordTypeInfoMap.get('AddressSetting').getRecordTypeId());
         addressMapping.put('orders__SalesOrganizationId__c', salesOrgId);
         addressMapping.put('orders__AddressField__c', 'Name');
         addressMapping.put('orders__SOQLFilter__c', 'WHERE Id != NULL');
         settings.add(addressMapping);
-
+    
         SObject layoutDelivery = GLOBAL_DESCRIBE.get(omSettingsObjectName).newSObject(null, true);
-        layoutDelivery.put('RecordTypeId', Schema.SObjectType.orders__OMSettings__c.recordTypeInfosByDeveloperName.get('LayoutSetting').recordTypeId);
+        layoutDelivery.put('RecordTypeId', recordTypeInfoMap.get('LayoutSetting').getRecordTypeId());
         layoutDelivery.put('orders__FieldsToDisplay__c', 'Name');
         layoutDelivery.put('orders__Object__c', 'orders__Delivery__c');
         settings.add(layoutDelivery);
-
+    
         SObject layoutOrderLineItem = GLOBAL_DESCRIBE.get(omSettingsObjectName).newSObject(null, true);
-        layoutOrderLineItem.put('RecordTypeId', Schema.SObjectType.orders__OMSettings__c.recordTypeInfosByDeveloperName.get('LayoutSetting').recordTypeId);
+        layoutOrderLineItem.put('RecordTypeId', recordTypeInfoMap.get('LayoutSetting').getRecordTypeId());
         layoutOrderLineItem.put('orders__Object__c', 'orders__OrderLineItem__c');
         layoutOrderLineItem.put('orders__FieldsToDisplay__c', 'orders__ListPrice__c,orders__UnitPrice__c,orders__TotalPrice__c,orders__TotalDiscount__c');
         layoutOrderLineItem.put('orders__DisplayedFieldWidth__c', '50,30,20,0,15,5');
         settings.add(layoutOrderLineItem);
-
+    
         return settings;
     }
+    
 }
