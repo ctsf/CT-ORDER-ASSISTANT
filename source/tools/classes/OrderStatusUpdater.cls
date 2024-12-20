@@ -1,4 +1,4 @@
-public class OrderStatusUpdater {
+public with sharing class OrderStatusUpdater {
     @InvocableMethod(label='Update Order Status' description='Updates the status of multiple Orders')
     public static void updateOrderStatus(List<OrderStatusRequest> requests) {
         if (requests == null || requests.isEmpty()) {

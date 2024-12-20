@@ -1,4 +1,4 @@
-public class AccountCreation {
+public with sharing class AccountCreation {
     @InvocableMethod(label='Create Single Account' description='Creates a single Account based on input')
     public static void createSingleAccount(List<AccountRequest> requests) {
         if (requests == null || requests.size() != 1) {

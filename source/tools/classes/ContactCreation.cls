@@ -1,4 +1,4 @@
-public class ContactCreation {
+public with sharing class ContactCreation {
     @InvocableMethod(label='Create Contact for Account' description='Creates a single Contact and associates it with an Account')
     public static void createContact(List<ContactRequest> requests) {
         if (requests == null || requests.size() != 1) {
