@@ -49,4 +49,31 @@ public with sharing class Test_ContactNoActivityReport {
 
         System.assert(!found, 'Contact with recent activity should NOT appear in the report.');
     }
+
+    @IsTest
+    static void test_nullRequest() {
+        Test.startTest();
+        try {
+            ContactNoActivityReport.getContactsWithoutActivity(null);
+            System.Assert(false, 'Expected IllegalArgumentException for null request.');
+        } catch (IllegalArgumentException e) {
+            System.AssertEquals('Requests cannot be null or empty.', e.getMessage());
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void test_negativeMinDaysWithoutActivity() {
+        ContactNoActivityReport.ContactActivityRequest req = new ContactNoActivityReport.ContactActivityRequest();
+        req.MinDaysWithoutActivity = -5;
+
+        Test.startTest();
+        try {
+            ContactNoActivityReport.getContactsWithoutActivity(new List<ContactNoActivityReport.ContactActivityRequest>{req});
+            System.Assert(false, 'Expected IllegalArgumentException for negative MinDaysWithoutActivity.');
+        } catch (IllegalArgumentException e) {
+            System.AssertEquals('MinDaysWithoutActivity must be a non-negative integer.', e.getMessage());
+        }
+        Test.stopTest();
+    }
 }

@@ -108,7 +108,7 @@ public with sharing class Test_OrderProductAdding {
 
         OrderProductAdding.OrderProductRequest request = new OrderProductAdding.OrderProductRequest();
         request.OrderId = order.Id;
-        request.ProductId = product.Id; // Intentionally no matching PricebookEntry
+        request.ProductId = product.Id;
         request.Quantity = 1;
 
         Test.startTest();
@@ -117,6 +117,18 @@ public with sharing class Test_OrderProductAdding {
             System.assert(false, 'Exception should have been thrown for missing PricebookEntry.');
         } catch (IllegalArgumentException e) {
             System.assert(e.getMessage().contains('No matching PricebookEntry found for the specified product in the orders pricebook.'), 'Exception message should match');
+        }
+        Test.stopTest();
+    }
+
+    @isTest
+    static void testAddProductToOrder_nullRequest() {
+        Test.startTest();
+        try {
+            OrderProductAdding.addProductToOrder(null);
+            System.Assert(false, 'Expected IllegalArgumentException for null request.');
+        } catch (IllegalArgumentException e) {
+            System.AssertEquals('Requests cannot be null or empty.', e.getMessage());
         }
         Test.stopTest();
     }

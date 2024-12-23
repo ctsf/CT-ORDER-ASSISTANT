@@ -22,7 +22,7 @@ public with sharing class OpportunityStageAnalysis {
                 throw new Metadata.NoAccessException('You do not have permission to access required fields on Opportunity.');
             }
 
-            Date dateThreshold = Date.today().addDays(-request.MinDaysInStage);
+            DateTime dateThreshold = DateTime.newInstance(Date.today().addDays(-request.MinDaysInStage), Time.newInstance(23, 59, 59, 999));
 
             List<Opportunity> opportunities = [
                 SELECT Id, Name, StageName, LastModifiedDate
@@ -32,13 +32,13 @@ public with sharing class OpportunityStageAnalysis {
             ];
 
             for (Opportunity opp : opportunities) {
-                responses.add(new StageAnalysisResponse(
-                    opp.Id,
-                    opp.Name,
-                    opp.StageName,
-                    opp.LastModifiedDate
-                ));
-            }
+                StageAnalysisResponse response = new StageAnalysisResponse();
+                response.OpportunityId = opp.Id;
+                response.OpportunityName = opp.Name;
+                response.StageName = opp.StageName;
+                response.LastModifiedDate = opp.LastModifiedDate;
+                responses.add(response);
+            }            
         }
 
         return responses;
@@ -64,12 +64,5 @@ public with sharing class OpportunityStageAnalysis {
 
         @InvocableVariable(description='The last modified date of the opportunity')
         public DateTime LastModifiedDate;
-
-        public StageAnalysisResponse(Id opportunityId, String opportunityName, String stageName, DateTime lastModifiedDate) {
-            this.OpportunityId = opportunityId;
-            this.OpportunityName = opportunityName;
-            this.StageName = stageName;
-            this.LastModifiedDate = lastModifiedDate;
-        }
     }
 }

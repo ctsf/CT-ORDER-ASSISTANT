@@ -68,4 +68,16 @@ public class Test_EventUpdater {
         }
         Test.stopTest();
     }
+
+    @IsTest
+    static void testUpdateEventDate_nullRequest() {
+        Test.startTest();
+        try {
+            EventUpdater.updateEventDates(null);
+            System.Assert(false, 'Expected IllegalArgumentException for null request.');
+        } catch (IllegalArgumentException e) {
+            System.AssertEquals('Requests cannot be null or empty.', e.getMessage());
+        }
+        Test.stopTest();
+    }
 }

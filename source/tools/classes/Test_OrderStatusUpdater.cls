@@ -85,4 +85,16 @@ public class Test_OrderStatusUpdater {
         }
         Test.stopTest();
     }
+
+    @IsTest
+    static void testUpdateOrderStatus_nullRequestList() {
+        Test.startTest();
+        try {
+            OrderStatusUpdater.updateOrderStatus(null);
+            System.Assert(false, 'Exception should have been thrown for null requests list.');
+        } catch (Exception e) {
+            System.Assert(e.getMessage().contains('Requests cannot be null or empty.'), 'Exception message should match');
+        }
+        Test.stopTest();
+    }
 }
