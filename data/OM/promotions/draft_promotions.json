@@ -1,0 +1,112 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__Promotion__c",
+        "referenceId": "Promotion_Global"
+      },
+      "Name": "Global Discount Promotion",
+      "orders__ExternalId__c": "Promo_Global_Discount_2025",
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central",
+      "orders__OrderStartDate__c": "2025-01-01",
+      "orders__OrderEndDate__c": "2025-12-31",
+      "orders__DeliveryStartDate__c": "2025-01-01",
+      "orders__DeliveryEndDate__c": "2025-12-31",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": true,
+      "orders__UniqueProductsNumberForDiscounts__c": 5,
+      "orders__Status__c": "Draft"
+    },
+    {
+      "attributes": {
+        "type": "orders__Promotion__c",
+        "referenceId": "Promotion_Nova"
+      },
+      "Name": "Apteka Nova Promotion",
+      "orders__ExternalId__c": "Promo_Apteka_Nova_2025",
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central",
+      "orders__OrderStartDate__c": "2025-03-01",
+      "orders__OrderEndDate__c": "2025-06-30",
+      "orders__DeliveryStartDate__c": "2025-03-05",
+      "orders__DeliveryEndDate__c": "2025-07-05",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__UniqueProductsNumberForDiscounts__c": 3,
+      "orders__Status__c": "Draft"
+    },
+    {
+      "attributes": {
+        "type": "orders__Promotion__c",
+        "referenceId": "Promotion_HealthFirst"
+      },
+      "Name": "HealthFirst Pharmacy Promotion",
+      "orders__ExternalId__c": "Promo_HealthFirst_2025",
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central",
+      "orders__OrderStartDate__c": "2025-03-01",
+      "orders__OrderEndDate__c": "2025-06-30",
+      "orders__DeliveryStartDate__c": "2025-03-05",
+      "orders__DeliveryEndDate__c": "2025-07-05",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__UniqueProductsNumberForDiscounts__c": 3,
+      "orders__Status__c": "Draft"
+    },
+    {
+      "attributes": {
+        "type": "orders__Promotion__c",
+        "referenceId": "Promotion_MediCore"
+      },
+      "Name": "MediCore Pharmacy Promotion",
+      "orders__ExternalId__c": "Promo_MediCore_2025",
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central",
+      "orders__OrderStartDate__c": "2025-03-01",
+      "orders__OrderEndDate__c": "2025-06-30",
+      "orders__DeliveryStartDate__c": "2025-03-05",
+      "orders__DeliveryEndDate__c": "2025-07-05",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__UniqueProductsNumberForDiscounts__c": 3,
+      "orders__Status__c": "Draft"
+    },
+    {
+      "attributes": {
+        "type": "orders__Promotion__c",
+        "referenceId": "Promotion_Wellness"
+      },
+      "Name": "Wellness Plus Promotion",
+      "orders__ExternalId__c": "Promo_Wellness_2025",
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central",
+      "orders__OrderStartDate__c": "2025-04-01",
+      "orders__OrderEndDate__c": "2025-08-31",
+      "orders__DeliveryStartDate__c": "2025-04-05",
+      "orders__DeliveryEndDate__c": "2025-09-05",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__UniqueProductsNumberForDiscounts__c": 4,
+      "orders__Status__c": "Draft"
+    },
+    {
+      "attributes": {
+        "type": "orders__Promotion__c",
+        "referenceId": "Promotion_Lifeline"
+      },
+      "Name": "Lifeline Pharmacy Promotion",
+      "orders__ExternalId__c": "Promo_Lifeline_2025",
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central",
+      "orders__OrderStartDate__c": "2025-05-01",
+      "orders__OrderEndDate__c": "2025-10-31",
+      "orders__DeliveryStartDate__c": "2025-05-05",
+      "orders__DeliveryEndDate__c": "2025-11-05",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__UniqueProductsNumberForDiscounts__c": 4,
+      "orders__Status__c": "Draft"
+    }
+  ]
+}

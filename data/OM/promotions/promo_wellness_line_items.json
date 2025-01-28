@@ -1,0 +1,69 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "WellnessLineItem_1"
+      },
+      "orders__ExternalId__c": "WellnessLineItem_1",
+      "orders__PromotionId__c": "@Promotion_Wellness",
+      "orders__Product2Id__c": "@prod_0021",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "WellnessLineItem_2"
+      },
+      "orders__ExternalId__c": "WellnessLineItem_2",
+      "orders__PromotionId__c": "@Promotion_Wellness",
+      "orders__Product2Id__c": "@prod_0022",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "WellnessLineItem_3"
+      },
+      "orders__ExternalId__c": "WellnessLineItem_3",
+      "orders__PromotionId__c": "@Promotion_Wellness",
+      "orders__Product2Id__c": "@prod_0023",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "WellnessLineItem_4"
+      },
+      "orders__ExternalId__c": "WellnessLineItem_4",
+      "orders__PromotionId__c": "@Promotion_Wellness",
+      "orders__Product2Id__c": "@prod_0024",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "WellnessLineItem_5"
+      },
+      "orders__ExternalId__c": "WellnessLineItem_5",
+      "orders__PromotionId__c": "@Promotion_Wellness",
+      "orders__Product2Id__c": "@prod_0025",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    }
+  ]
+}

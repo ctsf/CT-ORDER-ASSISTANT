@@ -1,0 +1,70 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__Catalog__c",
+        "referenceId": "Catalog_AllAccounts_Regional"
+      },
+      "Name": "Pharma General Catalog - Regional",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": true,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_regional"
+    },
+    {
+      "attributes": {
+        "type": "orders__Catalog__c",
+        "referenceId": "Catalog_AptekaNova_Regional"
+      },
+      "Name": "Exclusive Catalog for Apteka Nova - Regional",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_regional"
+    },
+    {
+      "attributes": {
+        "type": "orders__Catalog__c",
+        "referenceId": "Catalog_HealthFirst_Regional"
+      },
+      "Name": "Exclusive Catalog for HealthFirst Pharmacy - Regional",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_regional"
+    },
+    {
+      "attributes": {
+        "type": "orders__Catalog__c",
+        "referenceId": "Catalog_MediCore_Regional"
+      },
+      "Name": "Exclusive Catalog for MediCore Pharmacy - Regional",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_regional"
+    },
+    {
+      "attributes": {
+        "type": "orders__Catalog__c",
+        "referenceId": "Catalog_WellnessPlus_Regional"
+      },
+      "Name": "Exclusive Catalog for Wellness Plus Pharmacy - Regional",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_regional"
+    },
+    {
+      "attributes": {
+        "type": "orders__Catalog__c",
+        "referenceId": "Catalog_Lifeline_Regional"
+      },
+      "Name": "Exclusive Catalog for Lifeline Pharmacy - Regional",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_regional"
+    }
+  ]
+}

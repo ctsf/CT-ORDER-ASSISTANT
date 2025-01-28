@@ -1,0 +1,49 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_AptekaNova_Prod_0002"
+      },
+      "orders__CatalogId__c": "@Catalog_AptekaNova",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0002"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_AptekaNova_Prod_0012"
+      },
+      "orders__CatalogId__c": "@Catalog_AptekaNova",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0012"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_AptekaNova_Prod_0022"
+      },
+      "orders__CatalogId__c": "@Catalog_AptekaNova",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0022"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_AptekaNova_Prod_0032"
+      },
+      "orders__CatalogId__c": "@Catalog_AptekaNova",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0032"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_AptekaNova_Prod_0042"
+      },
+      "orders__CatalogId__c": "@Catalog_AptekaNova",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0042"
+    }
+  ]
+}

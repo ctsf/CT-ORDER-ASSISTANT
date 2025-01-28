@@ -1,0 +1,124 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "prod_0041"
+      },
+      "orders__ExternalId__c": "0041",
+      "Name": "Metformin 500mg",
+      "Family": "Diabetes Management",
+      "orders__DefaultAvailabilityType__c": "Available",
+      "orders__IsSKU__c": true,
+      "isActive": true
+    },
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "prod_0042"
+      },
+      "orders__ExternalId__c": "0042",
+      "Name": "Glimepiride 2mg",
+      "Family": "Diabetes Management",
+      "orders__DefaultAvailabilityType__c": "Available",
+      "orders__IsSKU__c": true,
+      "isActive": true
+    },
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "prod_0043"
+      },
+      "orders__ExternalId__c": "0043",
+      "Name": "Sitagliptin 100mg",
+      "Family": "Diabetes Management",
+      "orders__DefaultAvailabilityType__c": "Available",
+      "orders__IsSKU__c": true,
+      "isActive": true
+    },
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "prod_0044"
+      },
+      "orders__ExternalId__c": "0044",
+      "Name": "Insulin Glargine 100IU/ml",
+      "Family": "Diabetes Management",
+      "orders__DefaultAvailabilityType__c": "Available",
+      "orders__IsSKU__c": true,
+      "isActive": true
+    },
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "prod_0045"
+      },
+      "orders__ExternalId__c": "0045",
+      "Name": "Insulin Aspart 100IU/ml",
+      "Family": "Diabetes Management",
+      "orders__DefaultAvailabilityType__c": "Available",
+      "orders__IsSKU__c": true,
+      "isActive": true
+    },
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "prod_0046"
+      },
+      "orders__ExternalId__c": "0046",
+      "Name": "Dapagliflozin 10mg",
+      "Family": "Diabetes Management",
+      "orders__DefaultAvailabilityType__c": "Available",
+      "orders__IsSKU__c": true,
+      "isActive": true
+    },
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "prod_0047"
+      },
+      "orders__ExternalId__c": "0047",
+      "Name": "Pioglitazone 15mg",
+      "Family": "Diabetes Management",
+      "orders__DefaultAvailabilityType__c": "Available",
+      "orders__IsSKU__c": true,
+      "isActive": true
+    },
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "prod_0048"
+      },
+      "orders__ExternalId__c": "0048",
+      "Name": "Empagliflozin 25mg",
+      "Family": "Diabetes Management",
+      "orders__DefaultAvailabilityType__c": "Available",
+      "orders__IsSKU__c": true,
+      "isActive": true
+    },
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "prod_0049"
+      },
+      "orders__ExternalId__c": "0049",
+      "Name": "Liraglutide 6mg/ml",
+      "Family": "Diabetes Management",
+      "orders__DefaultAvailabilityType__c": "Available",
+      "orders__IsSKU__c": true,
+      "isActive": true
+    },
+    {
+      "attributes": {
+        "type": "Product2",
+        "referenceId": "prod_0050"
+      },
+      "orders__ExternalId__c": "0050",
+      "Name": "Gliclazide 60mg",
+      "Family": "Diabetes Management",
+      "orders__DefaultAvailabilityType__c": "Available",
+      "orders__IsSKU__c": true,
+      "isActive": true
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__Catalog__c",
+        "referenceId": "Catalog_AllAccounts"
+      },
+      "Name": "Pharma General Catalog",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": true,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central"
+    },
+    {
+      "attributes": {
+        "type": "orders__Catalog__c",
+        "referenceId": "Catalog_AptekaNova"
+      },
+      "Name": "Exclusive Catalog for Apteka Nova",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central"
+    },
+    {
+      "attributes": {
+        "type": "orders__Catalog__c",
+        "referenceId": "Catalog_HealthFirst"
+      },
+      "Name": "Exclusive Catalog for HealthFirst Pharmacy",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central"
+    },
+    {
+      "attributes": {
+        "type": "orders__Catalog__c",
+        "referenceId": "Catalog_MediCore"
+      },
+      "Name": "Exclusive Catalog for MediCore Pharmacy",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central"
+    },
+    {
+      "attributes": {
+        "type": "orders__Catalog__c",
+        "referenceId": "Catalog_WellnessPlus"
+      },
+      "Name": "Exclusive Catalog for Wellness Plus Pharmacy",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central"
+    },
+    {
+      "attributes": {
+        "type": "orders__Catalog__c",
+        "referenceId": "Catalog_Lifeline"
+      },
+      "Name": "Exclusive Catalog for Lifeline Pharmacy",
+      "orders__IsActive__c": true,
+      "orders__IsAvailableForAllAccounts__c": false,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central"
+    }
+  ]
+}

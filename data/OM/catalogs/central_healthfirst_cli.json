@@ -1,0 +1,49 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_HealthFirst_Prod_0003"
+      },
+      "orders__CatalogId__c": "@Catalog_HealthFirst",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0003"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_HealthFirst_Prod_0013"
+      },
+      "orders__CatalogId__c": "@Catalog_HealthFirst",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0013"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_HealthFirst_Prod_0023"
+      },
+      "orders__CatalogId__c": "@Catalog_HealthFirst",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0023"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_HealthFirst_Prod_0033"
+      },
+      "orders__CatalogId__c": "@Catalog_HealthFirst",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0033"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_HealthFirst_Prod_0043"
+      },
+      "orders__CatalogId__c": "@Catalog_HealthFirst",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0043"
+    }
+  ]
+}

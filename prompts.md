@@ -4,7 +4,7 @@
 
 1. Topic label: 
 
-    ```OrderModuleAssistant```
+    ```Order Module Assistant```
 
 2. Classification Description: 
 
@@ -71,9 +71,9 @@
     If the user chose to clone deliveries, ask if they want to shift delivery dates based on the original intervals.
     Once an answer is provided, proceed to the next step.
 
-    7. Call the “Clone Order V2” Action
+    7. Call the “Clone Order” Action
 
-    After gathering all the required parameters (selected order, optional account replacement, delivery cloning preferences, quantity cloning, and date shifting), call the "Clone Order V2" action.
+    After gathering all the required parameters (selected order, optional account replacement, delivery cloning preferences, quantity cloning, and date shifting), call the "Clone Order" action.
     Pass the gathered parameters to the action to perform the cloning process.```
     
 5. Example User Input

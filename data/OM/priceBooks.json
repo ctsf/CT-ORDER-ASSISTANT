@@ -1,0 +1,24 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__PriceBook__c",
+        "referenceId": "pricebook_pharma_central"
+      },
+      "Name": "Pharma Central Price Book",
+      "orders__IsActive__c": true,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central"
+    },
+    {
+      "attributes": {
+        "type": "orders__PriceBook__c",
+        "referenceId": "pricebook_pharma_regional"
+      },
+      "Name": "Pharma Regional Price Book",
+      "orders__IsActive__c": true,
+      "orders__OrderType__c": "Order",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_regional"
+    }
+  ]
+}

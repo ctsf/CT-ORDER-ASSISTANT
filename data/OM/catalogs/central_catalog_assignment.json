@@ -1,0 +1,49 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__CatalogAssignment__c",
+        "referenceId": "CatalogAssignment_AptekaNova"
+      },
+      "orders__AccountId__c": "@APTEKA_NOVA",
+      "orders__CatalogId__c": "@Catalog_AptekaNova",
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogAssignment__c",
+        "referenceId": "CatalogAssignment_HealthFirst"
+      },
+      "orders__AccountId__c": "@APTEKA_HEALTHFIRST",
+      "orders__CatalogId__c": "@Catalog_HealthFirst",
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogAssignment__c",
+        "referenceId": "CatalogAssignment_MediCore"
+      },
+      "orders__AccountId__c": "@APTEKA_MEDICORE",
+      "orders__CatalogId__c": "@Catalog_MediCore",
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogAssignment__c",
+        "referenceId": "CatalogAssignment_WellnessPlus"
+      },
+      "orders__AccountId__c": "@APTEKA_WELLNESS",
+      "orders__CatalogId__c": "@Catalog_WellnessPlus",
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogAssignment__c",
+        "referenceId": "CatalogAssignment_Lifeline"
+      },
+      "orders__AccountId__c": "@APTEKA_LIFELINE",
+      "orders__CatalogId__c": "@Catalog_Lifeline",
+      "orders__IsActive__c": true
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_Lifeline_Prod_0006"
+      },
+      "orders__CatalogId__c": "@Catalog_Lifeline",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0006"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_Lifeline_Prod_0016"
+      },
+      "orders__CatalogId__c": "@Catalog_Lifeline",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0016"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_Lifeline_Prod_0026"
+      },
+      "orders__CatalogId__c": "@Catalog_Lifeline",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0026"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_Lifeline_Prod_0036"
+      },
+      "orders__CatalogId__c": "@Catalog_Lifeline",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0036"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_Lifeline_Prod_0046"
+      },
+      "orders__CatalogId__c": "@Catalog_Lifeline",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0046"
+    }
+  ]
+}

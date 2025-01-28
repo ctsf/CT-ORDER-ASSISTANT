@@ -1,0 +1,124 @@
+{
+    "records": [
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0011"
+        },
+        "orders__ExternalId__c": "0011",
+        "Name": "Amoxicillin 500mg",
+        "Family": "Antibiotics",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0012"
+        },
+        "orders__ExternalId__c": "0012",
+        "Name": "Ciprofloxacin 250mg",
+        "Family": "Antibiotics",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0013"
+        },
+        "orders__ExternalId__c": "0013",
+        "Name": "Doxycycline 100mg",
+        "Family": "Antibiotics",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0014"
+        },
+        "orders__ExternalId__c": "0014",
+        "Name": "Clindamycin 300mg",
+        "Family": "Antibiotics",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0015"
+        },
+        "orders__ExternalId__c": "0015",
+        "Name": "Azithromycin 250mg",
+        "Family": "Antibiotics",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0016"
+        },
+        "orders__ExternalId__c": "0016",
+        "Name": "Levofloxacin 500mg",
+        "Family": "Antibiotics",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0017"
+        },
+        "orders__ExternalId__c": "0017",
+        "Name": "Metronidazole 400mg",
+        "Family": "Antibiotics",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0018"
+        },
+        "orders__ExternalId__c": "0018",
+        "Name": "Vancomycin 500mg",
+        "Family": "Antibiotics",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0019"
+        },
+        "orders__ExternalId__c": "0019",
+        "Name": "Ceftriaxone 1g",
+        "Family": "Antibiotics",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0020"
+        },
+        "orders__ExternalId__c": "0020",
+        "Name": "Amoxicillin/Clavulanate 875mg/125mg",
+        "Family": "Antibiotics",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      }
+    ]
+  }

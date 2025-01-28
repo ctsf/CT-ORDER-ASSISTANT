@@ -1,0 +1,104 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__PriceBookLineItem__c",
+        "referenceId": "price_regional_11"
+      },
+      "orders__PriceBookId__c": "@pricebook_pharma_regional",
+      "orders__Product2Id__c": "@prod_0011",
+      "orders__ListPrice__c": 8.5,
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PriceBookLineItem__c",
+        "referenceId": "price_regional_12"
+      },
+      "orders__PriceBookId__c": "@pricebook_pharma_regional",
+      "orders__Product2Id__c": "@prod_0012",
+      "orders__ListPrice__c": 9.5,
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PriceBookLineItem__c",
+        "referenceId": "price_regional_13"
+      },
+      "orders__PriceBookId__c": "@pricebook_pharma_regional",
+      "orders__Product2Id__c": "@prod_0013",
+      "orders__ListPrice__c": 7.8,
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PriceBookLineItem__c",
+        "referenceId": "price_regional_14"
+      },
+      "orders__PriceBookId__c": "@pricebook_pharma_regional",
+      "orders__Product2Id__c": "@prod_0014",
+      "orders__ListPrice__c": 10.8,
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PriceBookLineItem__c",
+        "referenceId": "price_regional_15"
+      },
+      "orders__PriceBookId__c": "@pricebook_pharma_regional",
+      "orders__Product2Id__c": "@prod_0015",
+      "orders__ListPrice__c": 11.5,
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PriceBookLineItem__c",
+        "referenceId": "price_regional_16"
+      },
+      "orders__PriceBookId__c": "@pricebook_pharma_regional",
+      "orders__Product2Id__c": "@prod_0016",
+      "orders__ListPrice__c": 12.5,
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PriceBookLineItem__c",
+        "referenceId": "price_regional_17"
+      },
+      "orders__PriceBookId__c": "@pricebook_pharma_regional",
+      "orders__Product2Id__c": "@prod_0017",
+      "orders__ListPrice__c": 5.8,
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PriceBookLineItem__c",
+        "referenceId": "price_regional_18"
+      },
+      "orders__PriceBookId__c": "@pricebook_pharma_regional",
+      "orders__Product2Id__c": "@prod_0018",
+      "orders__ListPrice__c": 15.5,
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PriceBookLineItem__c",
+        "referenceId": "price_regional_19"
+      },
+      "orders__PriceBookId__c": "@pricebook_pharma_regional",
+      "orders__Product2Id__c": "@prod_0019",
+      "orders__ListPrice__c": 20.5,
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PriceBookLineItem__c",
+        "referenceId": "price_regional_20"
+      },
+      "orders__PriceBookId__c": "@pricebook_pharma_regional",
+      "orders__Product2Id__c": "@prod_0020",
+      "orders__ListPrice__c": 18.5,
+      "orders__IsActive__c": true
+    }
+  ]
+}

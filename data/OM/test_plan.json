@@ -1,0 +1,8 @@
+[
+  {
+    "sobject": "orders__CalculationType__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["./pricing/calculationType.json"]
+  }
+]

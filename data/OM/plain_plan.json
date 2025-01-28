@@ -1,0 +1,100 @@
+[
+  {
+    "sobject": "orders__SalesOrganization__c",
+    "saveRefs": true,
+    "resolveRefs": false,
+    "files": ["salesOrganizations.json"]
+  },
+  {
+    "sobject": "Account",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["accounts.json"]
+  },
+  {
+    "sobject": "Product2",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "./products/products_antibiotics.json",
+      "./products/products_cardiovascular.json",
+      "./products/products_diabetes_management.json",
+      "./products/products_pain_relief.json",
+      "./products/products_respiratory.json"
+    ]
+  },
+  {
+    "sobject": "orders__PriceBook__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["priceBooks.json"]
+  },
+  {
+    "sobject": "orders__PriceBookLineItem__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "./pricebookLineItems/central_pbli_antibiotics.json",
+      "./pricebookLineItems/central_pbli_cardiovascular.json",
+      "./pricebookLineItems/central_pbli_diabetes_management.json",
+      "./pricebookLineItems/central_pbli_pain_relief.json",
+      "./pricebookLineItems/central_pbli_respiratory.json"
+    ]
+  },
+  {
+    "sobject": "orders__Catalog__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["./catalogs/central_catalogs.json"]
+  },
+  {
+    "sobject": "orders__CatalogLineItem__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "./catalogs/central_general_cli.json",
+      "./catalogs/central_lifeline_cli.json",
+      "./catalogs/central_medicore_cli.json",
+      "./catalogs/central_nova_cli.json",
+      "./catalogs/central_wellness_cli.json",
+      "./catalogs/central_healthfirst_cli.json"
+    ]
+  },
+  {
+    "sobject": "orders__CatalogAssignment__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["./catalogs/central_catalog_assignment.json"]
+  },
+  {
+    "sobject": "orders__Promotion__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["./promotions/draft_promotions.json"]
+  },
+  {
+    "sobject": "orders__PromotionLineItem__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": [
+      "./promotions/promo_global_line_items.json",
+      "./promotions/promo_healthfirst_line_items.json",
+      "./promotions/promo_lifeline_line_items.json",
+      "./promotions/promo_medicore_line_items.json",
+      "./promotions/promo_nova_line_items.json",
+      "./promotions/promo_wellness_line_items.json"
+    ]
+  },
+  {
+    "sobject": "orders__PromotionAssignment__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["./promotions/promotions_assignments.json"]
+  },
+  {
+    "sobject": "orders__PricingProcedure__c",
+    "saveRefs": true,
+    "resolveRefs": true,
+    "files": ["./pricing/pricingProcedure.json"]
+  }
+]
