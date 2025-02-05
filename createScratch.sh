@@ -2,11 +2,11 @@ scratchName=$1
 days=$2
 devHub=$3
 
-sf org create scratch -a "$scratchName" -y "$days" --definition-file config/my-agentforce-project-scratch-def.json --target-dev-hub "$devHub"
+# sf org create scratch -a "$scratchName" -y "$days" --definition-file config/my-agentforce-project-scratch-def.json --target-dev-hub "$devHub"
 
-yes | sf package install -p 04tKc0000004djU -w 30 -o "$scratchName"
+sf package install -p 04tKc0000004djU -w 30 -o "$scratchName" --no-prompt
 
-yes | sf package install -p 04t6S000001MTuJ -w 30 -o "$scratchName"
+sf package install -p 04t6S000001MTuJ -w 30 -o "$scratchName" --no-prompt
 
 sf data tree import --plan ./data/OM/plain_plan.json -o "$scratchName"
 

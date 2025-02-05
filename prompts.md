@@ -117,7 +117,7 @@
         
         2. Confirm Completion:
 
-            Inform the user once the order has been successfully cloned.
+            Inform the user once the order has been successfully cloned. And return order as an object to chat.
     
     Step 8: Check for Available Promotions for the New Account
         1. Retrieve Promotions:
@@ -133,7 +133,7 @@
         
         3. Assign Promotions:
 
-            If the user agrees to add promotions, use the Assign Promotions to Order action to attach the selected promotions to the cloned order.
+            If the user agrees to add promotions, use the Add Promotions to Order action to attach the selected promotions to the cloned order.
     
     Step 9: Verify Product Availability and Replace Unavailable Products
         1. Check Product Availability:
