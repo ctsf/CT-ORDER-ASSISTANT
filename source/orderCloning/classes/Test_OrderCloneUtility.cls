@@ -51,8 +51,8 @@ public with sharing class Test_OrderCloneUtility {
     }
 
     private static void validateClone(Id originalOrderId, Id clonedOrderId, Boolean expectDeliveries, Id expectedNewAccountId) {
-        orders__Order__c clonedOrder = [SELECT Id, orders__AccountId__c, orders__Stage__c FROM orders__Order__c WHERE Id = :clonedOrderId];
-        orders__Order__c originalOrder = [SELECT Id, orders__AccountId__c FROM orders__Order__c WHERE Id = :originalOrderId];
+        orders__Order__c clonedOrder = [SELECT Id, orders__AccountId__c, orders__Stage__c FROM orders__Order__c WHERE Id = :clonedOrderId WITH USER_MODE];
+        orders__Order__c originalOrder = [SELECT Id, orders__AccountId__c FROM orders__Order__c WHERE Id = :originalOrderId WITH USER_MODE];
 
         System.assertNotEquals(clonedOrder.Id, originalOrder.Id, 'Cloned order should have a different ID');
         System.assertEquals(clonedOrder.orders__Stage__c, 'OnHold', 'Cloned order stage should be "OnHold"');
@@ -67,6 +67,7 @@ public with sharing class Test_OrderCloneUtility {
             SELECT Id
             FROM orders__Delivery__c
             WHERE orders__OrderId__c = :clonedOrderId
+            WITH USER_MODE
         ];
 
         if (expectDeliveries) {

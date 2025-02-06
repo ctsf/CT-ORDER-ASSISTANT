@@ -6,7 +6,7 @@ public with sharing class Test_OrderRetrieval {
         orders__Order__c testOrder = (orders__Order__c) testData.get('testOrder');
         
         OrderRetrieval.OrderRetrievalRequest request = new OrderRetrieval.OrderRetrievalRequest();
-        testOrder = [SELECT Id, Name FROM orders__Order__c WHERE Id = :testOrder.Id LIMIT 1];
+        testOrder = [SELECT Id, Name FROM orders__Order__c WHERE Id = :testOrder.Id WITH USER_MODE LIMIT 1];
         request.autoNumber = testOrder.Name; 
 
         List<OrderRetrieval.OrderRetrievalRequest> requests = new List<OrderRetrieval.OrderRetrievalRequest>{request};

@@ -81,8 +81,10 @@ public with sharing class OrderRetrieval {
             SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate
             FROM orders__Order__c
             WHERE Name LIKE :('%' + autoNumber)
+            WITH USER_MODE
             ORDER BY CreatedDate DESC
             LIMIT 1
+           
         ];
     
         return orders.isEmpty() ? null : orders[0];
@@ -101,6 +103,7 @@ public with sharing class OrderRetrieval {
             SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate
             FROM orders__Order__c
             WHERE orders__AccountId__c = :accountId
+            WITH USER_MODE
             ORDER BY CreatedDate DESC
         ];
     }
@@ -119,6 +122,7 @@ public with sharing class OrderRetrieval {
             SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate
             FROM orders__Order__c
             WHERE orders__AccountId__c = :accountId
+            WITH USER_MODE
             ORDER BY CreatedDate DESC
             LIMIT 1
         ];
