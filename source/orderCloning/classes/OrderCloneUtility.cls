@@ -67,7 +67,7 @@ public with sharing class OrderCloneUtility {
         clonedOrder.orders__Stage__c = 'OnHold';
 
         try {
-            insert clonedOrder;
+            insert as user clonedOrder ;
         } catch (DmlException e) {
             throw new Metadata.NoAccessException('Error inserting cloned Order: ' + e.getMessage());
         }
