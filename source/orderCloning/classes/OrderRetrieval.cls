@@ -1,6 +1,6 @@
-public with sharing class OrderRetrieval {
+global with sharing class OrderRetrieval {
     @InvocableMethod(label='Retrieve Orders' description='Retrieve orders by AutoNumber or Account ID.')
-    public static List<OrderRetrievalResponse> retrieveOrders(List<OrderRetrievalRequest> requests) {
+    global static List<OrderRetrievalResponse> retrieveOrders(List<OrderRetrievalRequest> requests) {
         List<OrderRetrievalResponse> responses = new List<OrderRetrievalResponse>();
 
         for (OrderRetrievalRequest request : requests) {
@@ -49,23 +49,23 @@ public with sharing class OrderRetrieval {
         return responses;
     }
 
-    public class OrderRetrievalRequest {
+    global class OrderRetrievalRequest {
         @InvocableVariable(required=false label='AutoNumber' description='The AutoNumber of the order to retrieve.')
-        public String autoNumber;
+        global String autoNumber;
 
         @InvocableVariable(required=false label='Account ID' description='The Account ID to retrieve orders for.')
-        public Id accountId;
+        global Id accountId;
     }
 
-    public class OrderRetrievalResponse {
+    global class OrderRetrievalResponse {
         @InvocableVariable(label='Status' description='The status of the order retrieval operation.')
-        public String status;
+        global String status;
 
         @InvocableVariable(label='Message' description='Details about the order retrieval operation.')
-        public String message;
+        global String message;
 
         @InvocableVariable(label='Orders' description='The list of retrieved orders.')
-        public List<orders__Order__c> orders;
+        global List<orders__Order__c> orders;
     }
 
     public static orders__Order__c getOrderByAutoNumber(String autoNumber) {

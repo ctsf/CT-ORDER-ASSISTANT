@@ -1,6 +1,6 @@
-public with sharing class EinsteinAgentOrderClone {
+global with sharing class EinsteinAgentOrderClone {
     @InvocableMethod(label='Clone Order' description='Clones an order and its related records.')
-    public static List<CloneOrderResponse> cloneOrders(List<CloneOrderRequest> requests) {
+    global static List<CloneOrderResponse> cloneOrders(List<CloneOrderRequest> requests) {
         List<CloneOrderResponse> responses = new List<CloneOrderResponse>();
 
         for (CloneOrderRequest request : requests) {
@@ -43,34 +43,34 @@ public with sharing class EinsteinAgentOrderClone {
         return responses;
     }
 
-    public class CloneOrderRequest {
+    global class CloneOrderRequest {
         @InvocableVariable(required=false label='Order ID' description='The ID of the order to clone.')
-        public Id orderId;
+        global Id orderId;
 
         @InvocableVariable(required=false label='New Account ID' description='The new Account ID to replace in the cloned order.')
-        public Id newAccountId;
+        global Id newAccountId;
 
         @InvocableVariable(required=true label='Clone Deliveries' description='Whether to clone the deliveries associated with the order.')
-        public Boolean cloneDeliveries;
+        global Boolean cloneDeliveries;
 
         @InvocableVariable(required=false label='Shift Delivery Dates' description='Whether to shift delivery dates based on the original intervals.')
-        public Boolean shiftDeliveryDates;
+        global Boolean shiftDeliveryDates;
 
         @InvocableVariable(required=false label='Clone Quantities' description='Whether to clone the quantities in the order.')
-        public Boolean cloneQuantities;
+        global Boolean cloneQuantities;
     }
 
-    public class CloneOrderResponse {
+    global class CloneOrderResponse {
         @InvocableVariable(label='Status' description='The status of the cloning operation.')
-        public String status;
+        global String status;
 
         @InvocableVariable(label='Message' description='Details about the cloning operation.')
-        public String message;
+        global String message;
 
         @InvocableVariable(label='Cloned Order ID' description='The ID of the cloned order.')
-        public String clonedOrderId;
+        global String clonedOrderId;
 
         @InvocableVariable(label='Cloned Order Link' description='A hyperlink to view the cloned order in Salesforce.')
-        public String clonedOrderLink;
+        global String clonedOrderLink;
     }
 }
