@@ -1,9 +1,9 @@
 global with sharing class ProductAvailabilityChecker {
 
-    @InvocableMethod(label='Check Product Availability' description='Checks product availability for an order and suggests replacements if needed.')
+    @InvocableMethod(label='Check Product Availability' 
+                       description='Checks product availability for an order and returns order line items with their availability status.')
     global static List<ProductAvailabilityResponse> checkProductAvailability(List<ProductAvailabilityRequest> requests) {
         List<ProductAvailabilityResponse> responses = new List<ProductAvailabilityResponse>();
-
         for (ProductAvailabilityRequest request : requests) {
             responses.add(processSingleRequest(request));
         }
@@ -42,46 +42,77 @@ global with sharing class ProductAvailabilityChecker {
                 return response;
             }
 
-            Set<Id> orderLineItemIds = new Set<Id>();
+            // Собираем ID продуктов и строки заказа.
             Set<Id> productIds = new Set<Id>();
+            Set<Id> orderLineItemIds = new Set<Id>();
             for (orders__OrderLineItem__c oli : orderLineItems) {
                 orderLineItemIds.add(oli.Id);
                 productIds.add(oli.orders__Product2Id__c);
             }
-
+            
+            // Получаем связанные доставки для строк заказа.
             Map<Id, Id> oliToDeliveryMap = fetchDeliveryMap(orderLineItemIds);
             Set<Id> deliveryIds = new Set<Id>(oliToDeliveryMap.values());
-
             Set<Date> deliveryDates = fetchDeliveryDates(deliveryIds);
             if (deliveryDates.isEmpty()) {
                 response.status = 'ERROR';
                 response.message = 'No delivery dates found for this order.';
                 return response;
             }
-
-            Map<Id, List<orders__ProductAvailability__c>> availabilityMap = fetchProductAvailabilities(productIds, orderRecord, deliveryDates);
-
-           
-            List<ReplacementMapping> replacementMappings = new List<ReplacementMapping>();
-            for (orders__OrderLineItem__c oli : orderLineItems) {
-                if (!availabilityMap.containsKey(oli.orders__Product2Id__c)) {
-                    List<Id> replacements = findReplacementProducts(oli.orders__Product2Id__c, oli.orders__CatalogId__c, oli.orders__PromotionId__c, orderRecord.orders__PriceBookId__c);
-                    if (!replacements.isEmpty()) {
-                        ReplacementMapping rm = new ReplacementMapping();
             
-                        rm.unavailableProductId = String.valueOf(oli.orders__Product2Id__c);
-                        rm.replacementProductIds = new List<String>();
-                        for (Id repId : replacements) {
-                            rm.replacementProductIds.add(String.valueOf(repId));
+            // Запрашиваем записи Product Availability для всех продуктов.
+            Map<Id, List<orders__ProductAvailability__c>> availabilityMap = fetchProductAvailabilities(productIds, orderRecord, deliveryDates);
+            
+            // Формируем список обёрток для строк заказа.
+            List<OrderLineItemResponse> oliResponses = new List<OrderLineItemResponse>();
+            for (orders__OrderLineItem__c oli : orderLineItems) {
+                OrderLineItemResponse oliResp = new OrderLineItemResponse();
+                oliResp.orderLineItemId = String.valueOf(oli.Id);
+                oliResp.productName = oli.orders__Product2Id__r.Name;
+                
+                // Если дефолтное состояние продукта равно "unavailable", проверяем записи PA.
+                if (oli.orders__Product2Id__r.orders__DefaultAvailabilityType__c != null &&
+                    oli.orders__Product2Id__r.orders__DefaultAvailabilityType__c.equalsIgnoreCase('unavailable')) {
+                    
+                    List<orders__ProductAvailability__c> paList = availabilityMap.get(oli.orders__Product2Id__c);
+                    Boolean productIsUnavailable = false;
+                    // Если нет PA записей – продукт недоступен.
+                    if (paList == null || paList.isEmpty()) {
+                        productIsUnavailable = true;
+                    } else {
+                        // Если записи PA есть, проверяем наличие хотя бы одной с типом "available".
+                        Boolean foundAvailable = false;
+                        for (orders__ProductAvailability__c pa : paList) {
+                            if (pa.orders__AvailabilityType__c != null &&
+                                pa.orders__AvailabilityType__c.equalsIgnoreCase('available')) {
+                                foundAvailable = true;
+                                break;
+                            }
                         }
-                        replacementMappings.add(rm);
+                        // Если не найдено ни одной записи с типом "available", продукт недоступен.
+                        if (!foundAvailable) {
+                            productIsUnavailable = true;
+                        }
                     }
+                    
+                    if (productIsUnavailable) {
+                        oliResp.status = 'UNAVAILABLE';
+                        oliResp.message = 'Product is unavailable (default is unavailable and no available PA found).';
+                    } else {
+                        oliResp.status = 'AVAILABLE';
+                        oliResp.message = 'Product is available.';
+                    }
+                } else {
+                    // Если дефолтное состояние продукта не "unavailable", считаем его доступным.
+                    oliResp.status = 'AVAILABLE';
+                    oliResp.message = 'Product is available.';
                 }
+                oliResponses.add(oliResp);
             }
 
             response.status = 'SUCCESS';
             response.message = 'Product availability checked successfully.';
-            response.replacementMappings = replacementMappings;
+            response.orderLineItems = oliResponses;
         } catch (Exception e) {
             response.status = 'ERROR';
             response.message = 'An error occurred: ' + e.getMessage();
@@ -101,7 +132,8 @@ global with sharing class ProductAvailabilityChecker {
 
     private static List<orders__OrderLineItem__c> fetchOrderLineItems(Id orderId) {
         return [
-            SELECT Id, orders__Product2Id__c, orders__CatalogId__c, orders__PromotionId__c, orders__Quantity__c
+            SELECT Id, orders__Product2Id__c, orders__Product2Id__r.Name, orders__Product2Id__r.orders__DefaultAvailabilityType__c,
+                   orders__CatalogId__c, orders__PromotionId__c, orders__Quantity__c
             FROM orders__OrderLineItem__c
             WHERE orders__OrderId__c = :orderId
         ];
@@ -154,53 +186,33 @@ global with sharing class ProductAvailabilityChecker {
         return availabilityMap;
     }
 
-    private static List<Id> findReplacementProducts(Id productId, Id catalogId, Id promotionId, Id priceBookId) {
-        List<Id> replacements = new List<Id>();
-
-        if (catalogId != null) {
-            for (orders__CatalogLineItem__c cli : [
-                SELECT orders__Product2Id__c 
-                FROM orders__CatalogLineItem__c
-                WHERE orders__CatalogId__c = :catalogId
-            ]) {
-                replacements.add(cli.orders__Product2Id__c);
-            }
-        }
-
-        if (promotionId != null) {
-            for (orders__PromotionLineItem__c pli : [
-                SELECT orders__Product2Id__c
-                FROM orders__PromotionLineItem__c
-                WHERE orders__PromotionId__c = :promotionId
-            ]) {
-                replacements.add(pli.orders__Product2Id__c);
-            }
-        }
-        return replacements;
-    }
-
-
     global class ProductAvailabilityRequest {
         @InvocableVariable(required=true label='Order ID' description='The ID of the order to check.')
         global String orderId;
     }
 
     global class ProductAvailabilityResponse {
-        @InvocableVariable(label='Status' description='The status of the product availability check.')
+        @InvocableVariable(label='Status' description='The overall status of the product availability check.')
         global String status;
 
-        @InvocableVariable(label='Message' description='Details about the availability check.')
+        @InvocableVariable(label='Message' description='Overall message about the availability check.')
         global String message;
 
-        @InvocableVariable(label='Replacement Mappings' description='List of replacement mappings for unavailable products.')
-        global List<ReplacementMapping> replacementMappings;
+        @InvocableVariable(label='Order Line Items' description='List of order line items with their availability status and message.')
+        global List<OrderLineItemResponse> orderLineItems;
     }
 
-    global class ReplacementMapping {
-        @InvocableVariable(label='Unavailable Product ID' description='ID of the unavailable product.')
-        global String unavailableProductId;
+    global class OrderLineItemResponse {
+        @InvocableVariable(label='Order Line Item ID' description='ID of the order line item.')
+        global String orderLineItemId;
 
-        @InvocableVariable(label='Replacement Product IDs' description='List of replacement product IDs.')
-        global List<String> replacementProductIds;
+        @InvocableVariable(label='Product Name' description='Name of the product.')
+        global String productName;
+
+        @InvocableVariable(label='Status' description='Availability status of the order line item.')
+        global String status;
+
+        @InvocableVariable(label='Message' description='Message regarding the product availability for this order line item.')
+        global String message;
     }
 }
