@@ -67,7 +67,7 @@ public with sharing class OrderCloneUtility {
         clonedOrder.orders__Stage__c = 'OnHold';
 
         try {
-            insert clonedOrder;
+            insert as user clonedOrder ;
         } catch (DmlException e) {
             throw new Metadata.NoAccessException('Error inserting cloned Order: ' + e.getMessage());
         }
@@ -85,7 +85,7 @@ public with sharing class OrderCloneUtility {
             List<orders__Delivery__c> originalDeliveries = [
                 SELECT Id, orders__DeliveryDate__c,
                        (SELECT Id, orders__Quantity__c, orders__Product2Id__c, orders__OrderLineItemId__c
-                        FROM orders__DeliveryLineItems__r)
+                        FROM orders__DeliveryLineItems__r WITH USER_MODE)
                 FROM orders__Delivery__c
                 WHERE orders__OrderId__c = :sourceOrderId
                 WITH USER_MODE

@@ -1,8 +1,8 @@
-public with sharing class AccountRetrieval {
+global with sharing class AccountRetrieval {
     private static final Integer DEFAULT_LIMIT = 5;
 
     @InvocableMethod(label='Retrieve Accounts' description='Retrieve accounts by partial name.')
-    public static List<AccountRetrievalResponse> retrieveAccounts(List<AccountRetrievalRequest> requests) {
+    global static List<AccountRetrievalResponse> retrieveAccounts(List<AccountRetrievalRequest> requests) {
         List<AccountRetrievalResponse> responses = new List<AccountRetrievalResponse>();
 
         for (AccountRetrievalRequest request : requests) {
@@ -39,20 +39,20 @@ public with sharing class AccountRetrieval {
         return responses;
     }
 
-    public class AccountRetrievalRequest {
+    global class AccountRetrievalRequest {
         @InvocableVariable(required=true label='Partial Name' description='The partial name to search for.')
-        public String partialName;
+        global String partialName;
     }
 
-    public class AccountRetrievalResponse {
+    global class AccountRetrievalResponse {
         @InvocableVariable(label='Status' description='The status of the account retrieval operation.')
-        public String status;
+        global String status;
 
         @InvocableVariable(label='Message' description='Details about the account retrieval operation.')
-        public String message;
+        global String message;
 
         @InvocableVariable(label='Accounts' description='The list of retrieved accounts.')
-        public List<Account> accounts;
+        global List<Account> accounts;
     }
 
     public static List<Account> getAccountsByNameLike(String partialName) {
@@ -70,6 +70,7 @@ public with sharing class AccountRetrieval {
             SELECT Id, Name, Industry, Phone, BillingCity
             FROM Account
             WHERE Name LIKE :searchPattern
+            WITH USER_MODE
             ORDER BY Name ASC
             LIMIT :DEFAULT_LIMIT
         ];
