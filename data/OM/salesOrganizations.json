@@ -1,0 +1,12 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__SalesOrganization__c",
+        "referenceId": "SalesOrganization_pharma_central"
+      },
+      "Name": "Pharma Central Sales Org",
+      "orders__ExternalId__c": "pharma_central"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__PromotionAssignment__c",
+        "referenceId": "Assignment_Nova"
+      },
+      "orders__PromotionId__c": "@Promotion_Nova",
+      "orders__AccountId__c": "@APTEKA_NOVA",
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionAssignment__c",
+        "referenceId": "Assignment_HealthFirst"
+      },
+      "orders__PromotionId__c": "@Promotion_HealthFirst",
+      "orders__AccountId__c": "@APTEKA_HEALTHFIRST",
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionAssignment__c",
+        "referenceId": "Assignment_MediCore"
+      },
+      "orders__PromotionId__c": "@Promotion_MediCore",
+      "orders__AccountId__c": "@APTEKA_MEDICORE",
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionAssignment__c",
+        "referenceId": "Assignment_Wellness"
+      },
+      "orders__PromotionId__c": "@Promotion_Wellness",
+      "orders__AccountId__c": "@APTEKA_WELLNESS",
+      "orders__IsActive__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionAssignment__c",
+        "referenceId": "Assignment_Lifeline"
+      },
+      "orders__PromotionId__c": "@Promotion_Lifeline",
+      "orders__AccountId__c": "@APTEKA_LIFELINE",
+      "orders__IsActive__c": true
+    }
+  ]
+}

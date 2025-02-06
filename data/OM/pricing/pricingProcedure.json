@@ -1,0 +1,15 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__PricingProcedure__c",
+        "referenceId": "PricingProcedure_Default_Discount"
+      },
+      "Name": "Default Discount Pricing Procedure",
+      "orders__SalesOrganizationId__c": "@SalesOrganization_pharma_central",
+      "orders__IsActive__c": true,
+      "orders__OrderType__c": "Order",
+      "orders__PricingProcedure__c": "{\n  \"version\": 2,\n  \"steps\": [\n    {\n      \"type\": \"setValue\",\n      \"object\": \"orders__DeliveryLineItem__c\",\n      \"resultPrice\": \"$.unitPrice\",\n      \"condition\": {\n        \"operator\": \"AND\",\n        \"items\": [\n          {\n            \"field\": \"$.unitPrice\",\n            \"operator\": \"less\",\n            \"value\": 0\n          }\n        ]\n      },\n      \"value\": 0\n    },\n    {\n      \"type\": \"rollUp\",\n      \"baseObject\": \"orders__DeliveryLineItem__c\",\n      \"basePrice\": \"$.unitPrice\",\n      \"method\": \"copyEqual\",\n      \"result\": [\n        {\n          \"resultObject\": \"orders__OrderLineItem__c\",\n          \"resultPrice\": \"$.unitPrice\"\n        }\n      ]\n    },\n    {\n      \"type\": \"setValue\",\n      \"object\": \"orders__DeliveryLineItem__c\",\n      \"resultPrice\": \"$.totalPrice\",\n      \"value\": {\n        \"operator\": \"multi\",\n        \"items\": [\n          \"$.unitPrice\",\n          \"$.quantity\"\n        ]\n      }\n    },\n    {\n      \"type\": \"rollUp\",\n      \"baseObject\": \"orders__DeliveryLineItem__c\",\n      \"basePrice\": \"$.totalPrice\",\n      \"method\": \"sum\",\n      \"result\": [\n        {\n          \"resultObject\": \"orders__Order__c\",\n          \"resultPrice\": \"$.totalPrice\"\n        },\n        {\n          \"resultObject\": \"orders__Delivery__c\",\n          \"resultPrice\": \"$.totalPrice\"\n        },\n        {\n          \"resultObject\": \"orders__OrderLineItem__c\",\n          \"resultPrice\": \"$.totalPrice\"\n        }\n      ]\n    },\n    {\n      \"type\": \"setValue\",\n      \"object\": \"orders__DeliveryLineItem__c\",\n      \"resultPrice\": \"$.totalDiscount\",\n      \"value\": {\n        \"operator\": \"multi\",\n        \"items\": [\n          {\n            \"operator\": \"sum\",\n            \"items\": [\n              \"$.listPrice\",\n              \"- $.unitPrice\"\n            ]\n          },\n          \"$.quantity\"\n        ]\n      }\n    },\n    {\n      \"type\": \"rollUp\",\n      \"baseObject\": \"orders__DeliveryLineItem__c\",\n      \"basePrice\": \"$.totalDiscount\",\n      \"method\": \"sum\",\n      \"result\": [\n        {\n          \"resultObject\": \"orders__Order__c\",\n          \"resultPrice\": \"$.totalDiscount\"\n        },\n        {\n          \"resultObject\": \"orders__Delivery__c\",\n          \"resultPrice\": \"$.totalDiscount\"\n        },\n        {\n          \"resultObject\": \"orders__OrderLineItem__c\",\n          \"resultPrice\": \"$.totalDiscount\"\n        }\n      ]\n    }\n  ]\n}"
+    }
+  ]
+}

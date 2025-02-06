@@ -1,0 +1,49 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_AllAccounts_Prod_0001"
+      },
+      "orders__CatalogId__c": "@Catalog_AllAccounts",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0001"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_AllAccounts_Prod_0011"
+      },
+      "orders__CatalogId__c": "@Catalog_AllAccounts",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0011"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_AllAccounts_Prod_0021"
+      },
+      "orders__CatalogId__c": "@Catalog_AllAccounts",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0021"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_AllAccounts_Prod_0031"
+      },
+      "orders__CatalogId__c": "@Catalog_AllAccounts",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0031"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_AllAccounts_Prod_0041"
+      },
+      "orders__CatalogId__c": "@Catalog_AllAccounts",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0041"
+    }
+  ]
+}

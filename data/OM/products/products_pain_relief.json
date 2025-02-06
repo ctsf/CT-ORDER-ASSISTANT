@@ -1,0 +1,125 @@
+{
+    "records": [
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0001"
+        },
+        "orders__ExternalId__c": "0001",
+        "Name": "Ibuprofen 200mg",
+        "Family": "Pain Relief",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0002"
+        },
+        "orders__ExternalId__c": "0002",
+        "Name": "Paracetamol 500mg",
+        "Family": "Pain Relief",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0003"
+        },
+        "orders__ExternalId__c": "0003",
+        "Name": "Aspirin 300mg",
+        "Family": "Pain Relief",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0004"
+        },
+        "orders__ExternalId__c": "0004",
+        "Name": "Ketorolac 10mg",
+        "Family": "Pain Relief",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0005"
+        },
+        "orders__ExternalId__c": "0005",
+        "Name": "Diclofenac Sodium 50mg",
+        "Family": "Pain Relief",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0006"
+        },
+        "orders__ExternalId__c": "0006",
+        "Name": "Naproxen 250mg",
+        "Family": "Pain Relief",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0007"
+        },
+        "orders__ExternalId__c": "0007",
+        "Name": "Codeine Phosphate 30mg",
+        "Family": "Pain Relief",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0008"
+        },
+        "orders__ExternalId__c": "0008",
+        "Name": "Tramadol 50mg",
+        "Family": "Pain Relief",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0009"
+        },
+        "orders__ExternalId__c": "0009",
+        "Name": "Fentanyl Patch 25mcg",
+        "Family": "Pain Relief",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0010"
+        },
+        "orders__ExternalId__c": "0010",
+        "Name": "Morphine Sulfate 10mg",
+        "Family": "Pain Relief",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      }
+    ]
+  }
+  

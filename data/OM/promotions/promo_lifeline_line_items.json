@@ -1,0 +1,69 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "LifelineLineItem_1"
+      },
+      "orders__ExternalId__c": "LifelineLineItem_1",
+      "orders__PromotionId__c": "@Promotion_Lifeline",
+      "orders__Product2Id__c": "@prod_0026",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "LifelineLineItem_2"
+      },
+      "orders__ExternalId__c": "LifelineLineItem_2",
+      "orders__PromotionId__c": "@Promotion_Lifeline",
+      "orders__Product2Id__c": "@prod_0027",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "LifelineLineItem_3"
+      },
+      "orders__ExternalId__c": "LifelineLineItem_3",
+      "orders__PromotionId__c": "@Promotion_Lifeline",
+      "orders__Product2Id__c": "@prod_0028",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "LifelineLineItem_4"
+      },
+      "orders__ExternalId__c": "LifelineLineItem_4",
+      "orders__PromotionId__c": "@Promotion_Lifeline",
+      "orders__Product2Id__c": "@prod_0029",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "LifelineLineItem_5"
+      },
+      "orders__ExternalId__c": "LifelineLineItem_5",
+      "orders__PromotionId__c": "@Promotion_Lifeline",
+      "orders__Product2Id__c": "@prod_0030",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    }
+  ]
+}

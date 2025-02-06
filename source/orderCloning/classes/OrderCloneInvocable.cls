@@ -1,5 +1,5 @@
-global with sharing class EinsteinAgentOrderClone {
-    @InvocableMethod(label='Clone Order' description='Clones an order and its related records.')
+global with sharing class OrderCloneInvocable {
+    @InvocableMethod(label='Clone Order V2' description='Clones an order and its related records and returns the cloned order object.')
     global static List<CloneOrderResponse> cloneOrders(List<CloneOrderRequest> requests) {
         List<CloneOrderResponse> responses = new List<CloneOrderResponse>();
 
@@ -27,10 +27,16 @@ global with sharing class EinsteinAgentOrderClone {
                     response.status = 'ERROR';
                     response.message = 'Order cloning failed.';
                 } else {
+                    orders__Order__c clonedOrder = [
+                        SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate
+                        FROM orders__Order__c
+                        WHERE Id = :clonedOrderId
+                        LIMIT 1
+                    ];
+
                     response.status = 'SUCCESS';
                     response.message = 'Order cloned successfully.';
-                    response.clonedOrderId = clonedOrderId;
-                    response.clonedOrderLink = '<a href="/' + clonedOrderId + '" target="_blank">View Cloned Order</a>';
+                    response.clonedOrder = clonedOrder;
                 }
             } catch (Exception e) {
                 response.status = 'ERROR';
@@ -67,10 +73,7 @@ global with sharing class EinsteinAgentOrderClone {
         @InvocableVariable(label='Message' description='Details about the cloning operation.')
         global String message;
 
-        @InvocableVariable(label='Cloned Order ID' description='The ID of the cloned order.')
-        global String clonedOrderId;
-
-        @InvocableVariable(label='Cloned Order Link' description='A hyperlink to view the cloned order in Salesforce.')
-        global String clonedOrderLink;
+        @InvocableVariable(label='Cloned Order' description='The cloned order object.')
+        global orders__Order__c clonedOrder;
     }
 }

@@ -1,0 +1,69 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "HealthFirstLineItem_1"
+      },
+      "orders__ExternalId__c": "HealthFirstLineItem_1",
+      "orders__PromotionId__c": "@Promotion_HealthFirst",
+      "orders__Product2Id__c": "@prod_0011",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "HealthFirstLineItem_2"
+      },
+      "orders__ExternalId__c": "HealthFirstLineItem_2",
+      "orders__PromotionId__c": "@Promotion_HealthFirst",
+      "orders__Product2Id__c": "@prod_0012",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "HealthFirstLineItem_3"
+      },
+      "orders__ExternalId__c": "HealthFirstLineItem_3",
+      "orders__PromotionId__c": "@Promotion_HealthFirst",
+      "orders__Product2Id__c": "@prod_0013",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "HealthFirstLineItem_4"
+      },
+      "orders__ExternalId__c": "HealthFirstLineItem_4",
+      "orders__PromotionId__c": "@Promotion_HealthFirst",
+      "orders__Product2Id__c": "@prod_0014",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "HealthFirstLineItem_5"
+      },
+      "orders__ExternalId__c": "HealthFirstLineItem_5",
+      "orders__PromotionId__c": "@Promotion_HealthFirst",
+      "orders__Product2Id__c": "@prod_0015",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    }
+  ]
+}

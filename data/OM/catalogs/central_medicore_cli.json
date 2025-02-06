@@ -1,0 +1,49 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_MediCore_Prod_0004"
+      },
+      "orders__CatalogId__c": "@Catalog_MediCore",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0004"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_MediCore_Prod_0014"
+      },
+      "orders__CatalogId__c": "@Catalog_MediCore",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0014"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_MediCore_Prod_0024"
+      },
+      "orders__CatalogId__c": "@Catalog_MediCore",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0024"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_MediCore_Prod_0034"
+      },
+      "orders__CatalogId__c": "@Catalog_MediCore",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0034"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_MediCore_Prod_0044"
+      },
+      "orders__CatalogId__c": "@Catalog_MediCore",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0044"
+    }
+  ]
+}

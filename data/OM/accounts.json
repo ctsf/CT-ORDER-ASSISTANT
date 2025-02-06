@@ -1,0 +1,74 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "APTEKA_NOVA"
+      },
+      "Name": "Apteka Nova",
+      "AccountNumber": "Apteka_NOVA",
+      "ShippingStreet": "123 Nova Street",
+      "ShippingCity": "Cityville",
+      "ShippingState": "NV",
+      "ShippingPostalCode": "12345",
+      "ShippingCountry": "USA",
+      "orders__IsOrderAllowed__c": true
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "APTEKA_HEALTHFIRST"
+      },
+      "Name": "HealthFirst Pharmacy",
+      "AccountNumber": "HealthFirst_PHARM",
+      "ShippingStreet": "456 Health Avenue",
+      "ShippingCity": "Townburg",
+      "ShippingState": "HF",
+      "ShippingPostalCode": "67890",
+      "ShippingCountry": "USA",
+      "orders__IsOrderAllowed__c": true
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "APTEKA_MEDICORE"
+      },
+      "Name": "MediCore Pharmacy",
+      "AccountNumber": "MediCore_PHARM",
+      "ShippingStreet": "789 Medi Lane",
+      "ShippingCity": "Medicity",
+      "ShippingState": "MC",
+      "ShippingPostalCode": "54321",
+      "ShippingCountry": "USA",
+      "orders__IsOrderAllowed__c": true
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "APTEKA_WELLNESS"
+      },
+      "Name": "Wellness Plus Pharmacy",
+      "AccountNumber": "Wellness_PHARM",
+      "ShippingStreet": "321 Wellness Road",
+      "ShippingCity": "Springville",
+      "ShippingState": "WP",
+      "ShippingPostalCode": "11223",
+      "ShippingCountry": "USA",
+      "orders__IsOrderAllowed__c": true
+    },
+    {
+      "attributes": {
+        "type": "Account",
+        "referenceId": "APTEKA_LIFELINE"
+      },
+      "Name": "Lifeline Pharmacy",
+      "AccountNumber": "Lifeline_PHARM",
+      "ShippingStreet": "654 Lifeline Blvd",
+      "ShippingCity": "Rivertown",
+      "ShippingState": "LL",
+      "ShippingPostalCode": "33445",
+      "ShippingCountry": "USA",
+      "orders__IsOrderAllowed__c": true
+    }
+  ]
+}
