@@ -1,0 +1,102 @@
+### Step 1: Identify and Select the Order to Clone
+
+- **Determine Order Context:**  
+  - **On a Record Page:** If the user is already viewing an Order record page (orders__Order__c), use the clickable Order Name from the page.
+  - **Via User Input:** Otherwise, prompt the user using one of these methods:
+    - **Select by Account:** Ask if they want to choose an account (displayed as a list of account names) and then pick one of its associated orders.
+    - **Select by Order Number:** Ask the user to provide an Order Number (not the record ID) so the system can locate the order.
+
+---
+
+### Step 2: Retrieve and Confirm the Order Details
+
+- **For Order by Account:**
+  - **Retrieve Accounts:** Use the Retrieve Accounts action to show a list of accounts by name (or clickable record objects).
+  - **Account Selection:** Have the user select an account; if none is selected, re-prompt until a valid choice is made.
+  - **Retrieve Orders:** Once an account is chosen, use the Retrieve Orders action to fetch orders for that account and display them using friendly details (order name, number, creation date, etc.).
+  - **Confirm Order:** Ask the user to select and confirm the order they wish to clone.
+  
+- **For Order by Order Number:**
+  - **Prompt for Order Number:** Request the order number from the user.
+  - **Lookup Order:** Use the Retrieve Orders action to find the order based on the provided order number.
+  - **Confirm Order:** Display the order details using friendly objects and ask the user to confirm if this is the correct order for cloning.
+
+---
+
+### Step 3: Specify Cloning Preferences
+
+- **Account Replacement:**  
+  - Ask if the user wants to replace the account on the order.
+  - If yes, present a list of accounts (using friendly names/clickable records) and have the user select the new account.
+  
+- **Delivery Options:**  
+  - **Clone Deliveries:** Ask if the user wants to clone the deliveries associated with the order.
+  - **Clone Quantities:** If deliveries are to be cloned, ask whether the quantities in the deliveries should also be cloned.
+  - **Shift Dates:** Ask if delivery dates should be shifted according to the original intervals.
+
+---
+
+### Step 4: Clone the Order (Using Clone Order V3 Action)
+
+- **Execute Cloning:**  
+  - Call the Clone Order V3 action with the following parameters:
+    - The selected order (displayed via its name or clickable object).
+    - Optional account replacement details.
+    - Preferences for cloning deliveries, quantities, and shifting dates.
+  
+- **Confirmation:**  
+  - Once cloning completes, immediately display the details of the cloned order in a friendly format (new order name/number, associated account name, etc.).
+  - Inform the user that the cloning was successful.
+
+---
+
+### Step 5: Check for Available Promotions on the Cloned Order’s Account
+
+- **Retrieve Promotions:**  
+  - Using the account associated with the cloned order, call the Retrieve Promotions V2 action.
+  - Display the list of available promotions using friendly details (e.g., promotion names as clickable objects).
+  
+- **User Decision:**  
+  - Ask if the user would like to add any of these promotions to the cloned order.
+  - If the user agrees, use the Add Promotions to Order action to attach the selected promotions to the cloned order.
+  
+- **Note:**  
+  - This step should immediately follow a successful clone to ensure any available promotions are not missed.
+
+---
+
+### Step 6: Check Product Availability V3 for the Cloned Order and Process Replacements
+
+- **Initiate Availability Check:**  
+  - Call the Check Product Availability V3 action with the cloned order’s details (again, using friendly details like the order name rather than its ID).
+
+- **Review Unavailable Products:**  
+  - Display any products that are unavailable in a user-friendly list (using product names and clickable objects).
+
+- **Present Replacement Options:**  
+  - For each unavailable product, automatically call the Find Replacement Variants V2 action using the product’s details (such as its product ID) to fetch potential replacement variants based on the product’s Family field.
+  - Present the resulting list of replacement options to the user using friendly product names and clickable objects.
+
+- **User Interaction for Replacement:**  
+  - Ask the user to review the replacement options for each unavailable product.
+  - Allow the user to select the preferred replacement variant from the provided list.
+
+- **Apply Replacement:**  
+  - For each unavailable product where the user selects a replacement, call the Replace Single Order Line Item action to update the corresponding order line item with the chosen replacement variant.
+  - Confirm that the order line item has been updated accordingly.
+
+- **Finalize Changes:**  
+  - Update and display the final details of the cloned order, including updated order line items and current product availability status.
+
+---
+
+### Step 7: Final Confirmation
+
+- **Completion Notification:**  
+  - Inform the user that the entire process—cloning, promotions assignment, product availability checks, and product replacements—has been successfully completed.
+  
+- **Display Final Order Details:**  
+  - Present the final order details using user-friendly information (e.g., new order name/number, associated account, delivery details, updated product information) in a clickable, easy-to-read format.
+  
+- **Next Steps:**  
+  - Indicate that the order is now ready for further processing or review.

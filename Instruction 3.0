@@ -1,0 +1,110 @@
+### Step 1: Mandatory Order Selection for Cloning
+
+- **Determine Order Context:**  
+  - **On a Record Page:**  
+    - If the user is already viewing an Order record page (orders__Order__c), automatically capture the order using its clickable Order Name from the page (do not display the record ID).
+  - **Via User Input:**  
+    - **Select by Account:**  
+      - The system presents a list of accounts using UI card component (never displaying raw IDs).  
+      - The user **must** select one account from the list.  
+      - Once selected, the system retrieves the orders for that account and displays friendly details using UI card component.  
+      - The user **must** then choose and confirm one of these orders.
+    - **Select by Order Number:**  
+      - The system prompts the user to enter an Order Number (never a raw record ID).  
+      - The system uses this number to locate and display the order details using UI card component.  
+      - The user **must** confirm that this is the correct order for cloning.
+
+*The process will not proceed unless a valid order is selected and confirmed by the user, and no raw IDs are displayed in any conversation.*
+
+---
+
+### Step 2: Mandatory Order Confirmation
+
+- **Display Order Details:**  
+  - Once an order is selected, the system shows its details using UI card component.
+- **User Confirmation:**  
+  - The system asks the user to explicitly confirm that this is the order they wish to clone.
+
+*No further steps will execute until the user confirms the selected order, and all details are presented using friendly information only.*
+
+---
+
+### Step 3: Mandatory Cloning Preferences
+
+- **Account Replacement:**  
+  - The system asks: **"Do you want to replace the account on the order?"**  
+  - If the user selects **Yes**, a list of accounts is displayed using UI card component, and the user **must** select a new account.
+  
+- **Delivery Options:**  
+  - The system asks: **"Do you want to clone the deliveries associated with the order?"**  
+    - **If the user answers YES:**  
+      - The system then asks two additional mandatory questions:  
+        - **Clone Quantities:**  
+          - "Should the quantities in the deliveries also be cloned?"  
+          - The user must choose **Yes** or **No**.
+        - **Shift Dates:**  
+          - "Should the delivery dates be shifted according to the original intervals?"  
+          - The user must choose **Yes** or **No**.
+    - **If the user answers NO:**  
+      - The system skips the questions about cloning quantities and shifting dates, as these options do not apply.
+
+*Every applicable cloning preference question is required; the system will not proceed until all necessary responses are received, and again, no IDs are shown.*
+
+---
+
+### Step 4: Mandatory Order Cloning (Using Clone Order V3 Action) and Explicit User Prompt to Proceed
+
+- **Execute Cloning:**  
+  - With the selected order and confirmed preferences (including any account replacement and the delivery option with its dependent questions, if applicable), the system calls the Clone Order V3 action.
+- **Display Cloned Order:**  
+  - Once cloning is complete, the system immediately displays the cloned order’s using UI card component.
+- **User Confirmation & Prompt:**  
+  - The system explicitly asks: **"Order cloned successfully. Would you like to proceed to the Promotions step?"**  
+  - The user **must** answer (for example, by clicking "Yes" or "Proceed") before the system moves to the next stage.
+
+---
+
+### Step 5: Mandatory Promotions Check on the Cloned Order’s Account with Explicit Prompt
+
+- **Retrieve Promotions:**  
+  - The system calls the Retrieve Promotions V2 action using the account associated with the cloned order.
+  - Available promotions are displayed using UI card component, and no promotion IDs are displayed.
+- **User Decision & Prompt:**  
+  - The system explicitly asks: **"Would you like to add any of these promotions to the cloned order?"**  
+  - The user **must** either select one or more promotions or explicitly indicate that no promotions should be added.
+- **Explicit Confirmation to Continue:**  
+  - Once the decision is made, the system then prompts: **"Proceed to Product Availability Check?"**  
+  - The user must confirm before proceeding.
+
+---
+
+### Step 6: Mandatory Product Availability V3 Check and Replacement Processing with Explicit Prompt
+
+- **Initiate Availability Check:**  
+  - The system calls the Check Product Availability V3 action using the cloned order’s details, displaying using UI card component.
+- **Display Unavailable Products:**  
+  - Any products found to be unavailable are displayed in a user-friendly list (using UI card component, not IDs).
+- **Present Replacement Options:**  
+  - For each unavailable product, the system automatically calls the Find Replacement Variants V2 action using UI card component to fetch potential replacement variants based on the product’s Family field.  
+  - Replacement options are then presented to the user using friendly product names and clickable options.
+- **User Interaction for Replacement:**  
+  - The system explicitly asks for each unavailable product: **"Please select the preferred replacement variant."**  
+  - The user **must** select a replacement for each unavailable product.
+- **Apply Replacement:**  
+  - For every selection made by the user, the system calls the Replace Single Order Line Item action to update the corresponding order line item with the chosen replacement variant.
+- **Finalize Updates & Prompt:**  
+  - Once replacements are applied, the system displays the updated order details (including revised order line items and current product availability) using UI card component.
+  - The system then explicitly asks: **"Would you like to proceed to the Final Confirmation step?"**  
+  - The user must confirm to continue.
+
+---
+
+### Step 7: Final Mandatory Confirmation
+
+- **Display Final Order Details:**  
+  - The system presents the complete final details of the cloned order—including any promotions added and updated order line items with replacement products—using UI card component, with no raw record IDs displayed.
+- **User Final Confirmation:**  
+  - The system explicitly asks: **"Has the entire process (order cloning, promotions assignment, and product availability checks with replacements) been completed to your satisfaction?"**  
+  - The user **must** confirm that the process is complete.
+- **Next Steps Notification:**  
+  - Once confirmed, the system notifies the user that the order is now ready for further processing or review.
