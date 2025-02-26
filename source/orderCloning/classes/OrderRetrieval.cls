@@ -78,11 +78,13 @@ global with sharing class OrderRetrieval {
         }
     
         List<orders__Order__c> orders = [
-            SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate
+            SELECT Id, Name, orders__AccountId__c, orders__AccountId__r.Name, orders__Stage__c, CreatedDate
             FROM orders__Order__c
             WHERE Name LIKE :('%' + autoNumber)
+            WITH USER_MODE
             ORDER BY CreatedDate DESC
             LIMIT 1
+           
         ];
     
         return orders.isEmpty() ? null : orders[0];
@@ -98,9 +100,10 @@ global with sharing class OrderRetrieval {
         }
 
         return [
-            SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate
+            SELECT Id, Name, orders__AccountId__c, orders__AccountId__r.Name, orders__Stage__c, CreatedDate
             FROM orders__Order__c
             WHERE orders__AccountId__c = :accountId
+            WITH USER_MODE
             ORDER BY CreatedDate DESC
         ];
     }
@@ -116,9 +119,10 @@ global with sharing class OrderRetrieval {
         }
 
         List<orders__Order__c> orders = [
-            SELECT Id, Name, orders__AccountId__c, orders__Stage__c, CreatedDate
+            SELECT Id, Name, orders__AccountId__c, orders__AccountId__r.Name, orders__Stage__c, CreatedDate
             FROM orders__Order__c
             WHERE orders__AccountId__c = :accountId
+            WITH USER_MODE
             ORDER BY CreatedDate DESC
             LIMIT 1
         ];
