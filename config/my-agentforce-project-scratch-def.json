@@ -2,6 +2,7 @@
     "orgName": "GenAI Scratch Org",
     "edition": "Partner Developer",
     "features": ["Einstein1AIPlatform"],
+    "language": "en_US",
     "settings": {
       "einsteinGptSettings" : {
         "enableEinsteinGptPlatform" : true
