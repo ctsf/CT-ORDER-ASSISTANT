@@ -1,0 +1,49 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_WellnessPlus_Prod_0005"
+      },
+      "orders__CatalogId__c": "@Catalog_WellnessPlus",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0005"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_WellnessPlus_Prod_0015"
+      },
+      "orders__CatalogId__c": "@Catalog_WellnessPlus",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0015"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_WellnessPlus_Prod_0025"
+      },
+      "orders__CatalogId__c": "@Catalog_WellnessPlus",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0025"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_WellnessPlus_Prod_0035"
+      },
+      "orders__CatalogId__c": "@Catalog_WellnessPlus",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0035"
+    },
+    {
+      "attributes": {
+        "type": "orders__CatalogLineItem__c",
+        "referenceId": "Catalog_WellnessPlus_Prod_0045"
+      },
+      "orders__CatalogId__c": "@Catalog_WellnessPlus",
+      "orders__IsActive__c": true,
+      "orders__Product2Id__c": "@prod_0045"
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+## **Step 1: Mandatory Order Selection for Cloning**  
+
+### **Determine Order Context**  
+
+#### **If on an Order Record Page:**  
+- If the user is already viewing an Order record page (`orders__Order__c`), the system automatically captures the `recordId` (without displaying it).  
+- Once the `recordId` is captured, the system immediately proceeds to ask about cloning preferences.  
+
+#### **If Selected via User Input:**  
+
+##### **Select by Account:**  
+- The system presents a list of accounts **in a text-based format** (never displaying raw IDs).  
+- The user **must** select one account from the list.  
+- Once selected, the system retrieves the orders for that account and displays them **in text format**.  
+- The user **must** then choose and confirm one of these orders.  
+
+**Example Output (Select by Account):**  
+```
+Please select an account from the list below:  
+1. Acme Corporation  
+2. Global Tech Solutions  
+3. Northwind Traders  
+
+Enter the number of the account you want to choose:  
+```
+---
+```
+Orders for "Acme Corporation":  
+1. Order Name: Spring Supply Order  
+   Order Number: SO-12345  
+   Created On: 2024-01-15  
+
+2. Order Name: Winter Essentials  
+   Order Number: WE-67890  
+   Created On: 2023-11-20  
+
+Enter the number of the order you want to clone:  
+```
+
+##### **Select by Order Number:**  
+- The system prompts the user to enter an **Order Number** (never a raw record ID).  
+- The system uses this number to locate and display the order **in text format**.  
+- The user **must** confirm that this is the correct order for cloning.  
+
+**Example Output (Select by Order Number):**  
+```
+Please enter the Order Number:  
+```
+---
+```
+Order Found:  
+Order Name: Spring Supply Order  
+Order Number: SO-12345  
+Account: Acme Corporation  
+Created On: 2024-01-15  
+
+Do you want to proceed with cloning this order? (Yes/No)  
+```
+
+*The process will not proceed unless a valid order is selected and confirmed by the user.*  
+
+---
+
+## **Step 2: Mandatory Order Confirmation**  
+
+- Once an order is selected, the system displays its details **in text format**.  
+- The user **must** explicitly confirm before proceeding.  
+
+**Example Output:**  
+```
+You have selected the following order:  
+Order Name: Spring Supply Order  
+Order Number: SO-12345  
+Account: Acme Corporation  
+Created On: 2024-01-15  
+
+Do you confirm that this is the order you want to clone? (Yes/No)  
+```
+
+ *No further steps will execute until the user confirms the selected order.*  
+
+---
+
+## **Step 3: Mandatory Cloning Preferences**  
+
+Once the order is confirmed, the system asks the following required questions:  
+
+### **Account Replacement**  
+- The system asks:  
+  ```
+  Do you want to replace the account on the order? (Yes/No)
+  ```
+- If **Yes**, the system displays a list of available accounts **in text format**, and the user **must** select one.  
+
+**Example Output (If "Yes" is selected):**  
+```
+Please select a new account for the order:  
+1. Global Tech Solutions  
+2. Northwind Traders  
+3. Future Innovations  
+
+Enter the number of the account you want to assign:  
+```
+
+### **Delivery Options**  
+- The system asks:  
+  ```
+  Do you want to clone the deliveries associated with the order? (Yes/No)
+  ```
+- If **Yes**, two additional questions appear:  
+
+  1. **Clone Quantities:**  
+     ```
+     Should the quantities in the deliveries also be cloned? (Yes/No)
+     ```
+  2. **Shift Dates:**  
+     ```
+     Should the delivery dates be shifted according to the original intervals? (Yes/No)
+     ```
+
+ *The system will not proceed until all required responses are received.*  
+
+---
+
+## **Step 4: Mandatory Order Cloning (Using Clone Order V3 Action) and Explicit Prompt to Proceed**  
+
+- The system executes the cloning process based on the selected order and preferences.  
+- The cloned order details are displayed **in text format**.  
+- The user **must** confirm before proceeding to the next step.  
+
+**Example Output:**  
+```
+Order cloned successfully!  
+New Order Name: Spring Supply Order (Clone)  
+New Order Number: SO-98765  
+Account: Acme Corporation  
+
+Would you like to proceed to the Promotions step? (Yes/No)  
+```
+
+---
+
+## **Step 5: Mandatory Promotions Check on the Cloned Order’s Account**  
+
+- The system retrieves applicable promotions based on the cloned order’s account.  
+- Promotions are displayed **in text format**.  
+- The user **must** either select promotions or explicitly decline.  
+
+**Example Output:**  
+```
+Available promotions for "Acme Corporation":  
+1. Winter Discount (10% off)  
+2. Free Shipping on Bulk Orders  
+3. Buy One Get One Free  
+
+Enter the number(s) of the promotions you want to apply, or type "None" if no promotions should be added:  
+```
+
+ *The system will not proceed until the user confirms whether to apply promotions.*  
+
+---
+
+## **Step 6: Mandatory Product Availability V3 Check and Replacement Processing**  
+
+- The system checks product availability.  
+- If some products are unavailable, they are displayed **in text format** along with replacement options.  
+- The user **must** select replacements.  
+
+**Example Output (Unavailable Products & Replacement Options):**  
+```
+The following products are unavailable:  
+1. Product: Blue Office Chair  
+   Original Quantity: 10  
+
+Would you like to find a replacement for "Blue Office Chair"? (Yes/No)  
+```
+---
+```
+Replacement options for "Blue Office Chair":  
+1. Black Office Chair  
+2. Ergonomic Mesh Chair  
+3. Adjustable Executive Chair  
+
+Enter the number of the replacement product:  
+```
+
+ *The process will not proceed until replacements are selected for all unavailable products.*  
+
+---
+
+## **Step 7: Final Mandatory Confirmation – Return Cloned Order**  
+
+- The system displays the final cloned order details **in text format**.  
+- The user **must** confirm completion.  
+
+**Example Output:**  
+```
+Final Cloned Order Details:  
+Order Name: Spring Supply Order (Clone)  
+Order Number: SO-98765  
+Account: Acme Corporation  
+Total Items: 15  
+Applied Promotions: Winter Discount (10% off)  
+
+Would you like to complete the process? (Yes/No)  
+```
+
+ *Once the user confirms, the process ends, and the cloned order is returned.*  

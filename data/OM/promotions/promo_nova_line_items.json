@@ -1,0 +1,69 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "NovaLineItem_1"
+      },
+      "orders__ExternalId__c": "NovaLineItem_1",
+      "orders__PromotionId__c": "@Promotion_Nova",
+      "orders__Product2Id__c": "@prod_0006",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "NovaLineItem_2"
+      },
+      "orders__ExternalId__c": "NovaLineItem_2",
+      "orders__PromotionId__c": "@Promotion_Nova",
+      "orders__Product2Id__c": "@prod_0007",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "NovaLineItem_3"
+      },
+      "orders__ExternalId__c": "NovaLineItem_3",
+      "orders__PromotionId__c": "@Promotion_Nova",
+      "orders__Product2Id__c": "@prod_0008",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "NovaLineItem_4"
+      },
+      "orders__ExternalId__c": "NovaLineItem_4",
+      "orders__PromotionId__c": "@Promotion_Nova",
+      "orders__Product2Id__c": "@prod_0009",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "NovaLineItem_5"
+      },
+      "orders__ExternalId__c": "NovaLineItem_5",
+      "orders__PromotionId__c": "@Promotion_Nova",
+      "orders__Product2Id__c": "@prod_0010",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    }
+  ]
+}

@@ -1,28 +1,3 @@
-/**
- * Order Module,
- * Copyright (C) 2007-2024 Customertimes Corp.
- * 3 Columbus Circle, 15th Floor, #1513
- * New York, NY 10019
- * mailto:support@customertimes.com
- *
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- */
-
-String PackageNamespace = '';
-final String CPG_PACKAGE_NAME = 'CTCPG';
-final String PHARMA_PACKAGE_NAME = 'CTPHARMA';
-
-List<AggregateResult> apexClassesAggregate = [SELECT NamespacePrefix FROM ApexClass GROUP BY NamespacePrefix];
-
-for (AggregateResult agr : apexClassesAggregate) {
-    if (agr.get('NamespacePrefix') == CPG_PACKAGE_NAME) {
-        PackageNamespace = CPG_PACKAGE_NAME;
-    } else if (agr.get('NamespacePrefix') == PHARMA_PACKAGE_NAME) {
-        PackageNamespace = PHARMA_PACKAGE_NAME;
-    }
-}
-
 List<orders__OMSettings__c> SettingsToCreate = new List<orders__OMSettings__c>();
 
 orders__OMSettings__c ObjectSetting = new orders__OMSettings__c();
@@ -37,9 +12,6 @@ orders__OMSettings__c CatalogLineItemLayout = new orders__OMSettings__c();
 orders__OMSettings__c PromotionLineItemLayout = new orders__OMSettings__c();
 orders__OMSettings__c CatalogAssignmentLayout = new orders__OMSettings__c();
 
-if (Schema.SObjectType.orders__OMSettings__c.fields.orders__ActivityObject__c.isCreateable()) {
-    ObjectSetting.orders__ActivityObject__c = PackageNamespace + '__Activity__c';
-}
 
 if (Schema.SObjectType.orders__OMSettings__c.fields.orders__AddressField__c.isCreateable()) {
     AddressSetting.orders__AddressField__c = 'ShippingStreet';
@@ -52,17 +24,9 @@ if (Schema.SObjectType.orders__OMSettings__c.fields.orders__AddressObject__c.isC
 if (Schema.SObjectType.orders__OMSettings__c.fields.orders__FieldsToDisplay__c.isCreateable()) {
     OrderLineItemLayout.orders__FieldsToDisplay__c = 'orders__ListPrice__c,orders__UnitPrice__c,orders__TotalPrice__c';
     PromotionAssignmentLayout.orders__FieldsToDisplay__c = 'orders__AccountId__c';
-    CatalogLineItemLayout.orders__FieldsToDisplay__c = 'orders__ProductId__c';
-    PromotionLineItemLayout.orders__FieldsToDisplay__c = 'orders__ProductId__c,orders__IsUseForDiscount__c,orders__IsExcludeFromDiscount__c';
+    CatalogLineItemLayout.orders__FieldsToDisplay__c = 'orders__Product2Id__c';
+    PromotionLineItemLayout.orders__FieldsToDisplay__c = 'orders__Product2Id__c,orders__IsUseForDiscount__c,orders__IsExcludeFromDiscount__c';
     CatalogAssignmentLayout.orders__FieldsToDisplay__c = 'orders__AccountId__c';
-}
-
-if (Schema.SObjectType.orders__OMSettings__c.fields.orders__GroupObject__c.isCreateable()) {
-    ObjectSetting.orders__GroupObject__c = PackageNamespace + '__Group__c';
-}
-
-if (Schema.SObjectType.orders__OMSettings__c.fields.orders__GroupMemberObject__c.isCreateable()) {
-    ObjectSetting.orders__GroupMemberObject__c = PackageNamespace + '__GroupMember__c';
 }
 
 if (Schema.SObjectType.orders__OMSettings__c.fields.orders__ListPriceField__c.isCreateable()) {
@@ -83,11 +47,7 @@ if (Schema.SObjectType.orders__OMSettings__c.fields.orders__ParentObject__c.isCr
 }
 
 if (Schema.SObjectType.orders__OMSettings__c.fields.orders__ProductObject__c.isCreateable()) {
-    ObjectSetting.orders__ProductObject__c = PackageNamespace + '__Product__c';
-}
-
-if (Schema.SObjectType.orders__OMSettings__c.fields.orders__ProductComponentObject__c.isCreateable()) {
-    ObjectSetting.orders__ProductComponentObject__c = PackageNamespace + '__ProductComponent__c';
+    ObjectSetting.orders__ProductObject__c = 'Product2';
 }
 
 if (Schema.SObjectType.orders__OMSettings__c.fields.orders__QuantityField__c.isCreateable()) {
@@ -96,7 +56,7 @@ if (Schema.SObjectType.orders__OMSettings__c.fields.orders__QuantityField__c.isC
 }
 
 if (Schema.SObjectType.orders__OMSettings__c.fields.orders__SKUField__c.isCreateable()) {
-    ObjectSetting.orders__SKUField__c = PackageNamespace + '__IsActive__c';
+    ObjectSetting.orders__SKUField__c = 'orders__IsSKU__c';
 }
 
 if (Schema.SObjectType.orders__OMSettings__c.fields.orders__TotalDiscountField__c.isCreateable()) {

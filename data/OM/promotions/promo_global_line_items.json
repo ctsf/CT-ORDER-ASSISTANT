@@ -1,0 +1,69 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "GlobalLineItem_1"
+      },
+      "orders__ExternalId__c": "GlobalLineItem_1",
+      "orders__PromotionId__c": "@Promotion_Global",
+      "orders__Product2Id__c": "@prod_0001",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "GlobalLineItem_2"
+      },
+      "orders__ExternalId__c": "GlobalLineItem_2",
+      "orders__PromotionId__c": "@Promotion_Global",
+      "orders__Product2Id__c": "@prod_0002",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "GlobalLineItem_3"
+      },
+      "orders__ExternalId__c": "GlobalLineItem_3",
+      "orders__PromotionId__c": "@Promotion_Global",
+      "orders__Product2Id__c": "@prod_0003",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "GlobalLineItem_4"
+      },
+      "orders__ExternalId__c": "GlobalLineItem_4",
+      "orders__PromotionId__c": "@Promotion_Global",
+      "orders__Product2Id__c": "@prod_0004",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "GlobalLineItem_5"
+      },
+      "orders__ExternalId__c": "GlobalLineItem_5",
+      "orders__PromotionId__c": "@Promotion_Global",
+      "orders__Product2Id__c": "@prod_0005",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    }
+  ]
+}

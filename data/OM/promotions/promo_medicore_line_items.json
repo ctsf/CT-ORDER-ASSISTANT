@@ -1,0 +1,69 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "MediCoreLineItem_1"
+      },
+      "orders__ExternalId__c": "MediCoreLineItem_1",
+      "orders__PromotionId__c": "@Promotion_MediCore",
+      "orders__Product2Id__c": "@prod_0016",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "MediCoreLineItem_2"
+      },
+      "orders__ExternalId__c": "MediCoreLineItem_2",
+      "orders__PromotionId__c": "@Promotion_MediCore",
+      "orders__Product2Id__c": "@prod_0017",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "MediCoreLineItem_3"
+      },
+      "orders__ExternalId__c": "MediCoreLineItem_3",
+      "orders__PromotionId__c": "@Promotion_MediCore",
+      "orders__Product2Id__c": "@prod_0018",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "MediCoreLineItem_4"
+      },
+      "orders__ExternalId__c": "MediCoreLineItem_4",
+      "orders__PromotionId__c": "@Promotion_MediCore",
+      "orders__Product2Id__c": "@prod_0019",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    },
+    {
+      "attributes": {
+        "type": "orders__PromotionLineItem__c",
+        "referenceId": "MediCoreLineItem_5"
+      },
+      "orders__ExternalId__c": "MediCoreLineItem_5",
+      "orders__PromotionId__c": "@Promotion_MediCore",
+      "orders__Product2Id__c": "@prod_0020",
+      "orders__IsActive__c": true,
+      "orders__IsExcludeFromDiscount__c": false,
+      "orders__IsRequired__c": false,
+      "orders__IsUseForDiscount__c": true
+    }
+  ]
+}

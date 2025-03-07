@@ -1,0 +1,125 @@
+{
+    "records": [
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0031"
+        },
+        "orders__ExternalId__c": "0031",
+        "Name": "Salbutamol Inhaler 100mcg",
+        "Family": "Respiratory",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0032"
+        },
+        "orders__ExternalId__c": "0032",
+        "Name": "Budesonide Inhaler 200mcg",
+        "Family": "Respiratory",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0033"
+        },
+        "orders__ExternalId__c": "0033",
+        "Name": "Ipratropium Bromide Inhaler 20mcg",
+        "Family": "Respiratory",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0034"
+        },
+        "orders__ExternalId__c": "0034",
+        "Name": "Fluticasone Propionate Inhaler 125mcg",
+        "Family": "Respiratory",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0035"
+        },
+        "orders__ExternalId__c": "0035",
+        "Name": "Montelukast 10mg",
+        "Family": "Respiratory",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0036"
+        },
+        "orders__ExternalId__c": "0036",
+        "Name": "Tiotropium Bromide Inhaler 18mcg",
+        "Family": "Respiratory",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0037"
+        },
+        "orders__ExternalId__c": "0037",
+        "Name": "Prednisolone 5mg",
+        "Family": "Respiratory",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0038"
+        },
+        "orders__ExternalId__c": "0038",
+        "Name": "Theophylline 300mg",
+        "Family": "Respiratory",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0039"
+        },
+        "orders__ExternalId__c": "0039",
+        "Name": "Ciclesonide Inhaler 80mcg",
+        "Family": "Respiratory",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      },
+      {
+        "attributes": {
+          "type": "Product2",
+          "referenceId": "prod_0040"
+        },
+        "orders__ExternalId__c": "0040",
+        "Name": "Leukotriene Receptor Antagonist 4mg",
+        "Family": "Respiratory",
+        "orders__DefaultAvailabilityType__c": "Available",
+        "orders__IsSKU__c": true,
+        "isActive": true
+      }
+    ]
+  }
+  

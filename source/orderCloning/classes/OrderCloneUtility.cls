@@ -1,6 +1,7 @@
 public with sharing class OrderCloneUtility {
 
     private Id orderId;
+    private orders__Order__c originalOrder;
     private Id newAccountId;
 
     private Boolean isDeliveriesToBeCloned = true;
@@ -46,7 +47,7 @@ public with sharing class OrderCloneUtility {
             throw new IllegalArgumentException('No valid orderId or accountId provided for cloning.');
         }
 
-        orders__Order__c originalOrder = [
+        this.originalOrder = [
             SELECT Id, orders__OrderType__c, orders__Stage__c, orders__SalesOrganizationId__c,
                    orders__AccountId__c, orders__PriceBookId__c, CreatedDate
             FROM orders__Order__c
@@ -60,10 +61,10 @@ public with sharing class OrderCloneUtility {
         }
 
         orders__Order__c clonedOrder = new orders__Order__c();
-        clonedOrder.orders__OrderType__c = originalOrder.orders__OrderType__c;
-        clonedOrder.orders__SalesOrganizationId__c = originalOrder.orders__SalesOrganizationId__c;
+        clonedOrder.orders__OrderType__c = this.originalOrder.orders__OrderType__c;
+        clonedOrder.orders__SalesOrganizationId__c = this.originalOrder.orders__SalesOrganizationId__c;
         clonedOrder.orders__AccountId__c = newAccountId != null ? newAccountId : originalOrder.orders__AccountId__c;
-        clonedOrder.orders__PriceBookId__c = originalOrder.orders__PriceBookId__c;
+        clonedOrder.orders__PriceBookId__c = this.originalOrder.orders__PriceBookId__c;
         clonedOrder.orders__Stage__c = 'OnHold';
 
         try {
@@ -72,8 +73,11 @@ public with sharing class OrderCloneUtility {
             throw new Metadata.NoAccessException('Error inserting cloned Order: ' + e.getMessage());
         }
 
+        // TODO: set product field dynamically
         List<orders__OrderLineItem__c> originalOrderLineItems = [
-            SELECT Id, orders__CatalogId__c, orders__PromotionId__c, orders__Quantity__c, orders__Product2Id__c
+            SELECT Id, orders__CatalogLineItemId__c, orders__PromotionLineItemId__c,
+            orders__CatalogId__c, orders__PromotionId__c, orders__Quantity__c, orders__Product2Id__c,
+            orders__PriceBookId__c, orders__PriceBookLineItemId__c
             FROM orders__OrderLineItem__c
             WHERE orders__OrderId__c = :sourceOrderId
             WITH USER_MODE
@@ -83,7 +87,7 @@ public with sharing class OrderCloneUtility {
 
         if (isDeliveriesToBeCloned) {
             List<orders__Delivery__c> originalDeliveries = [
-                SELECT Id, orders__DeliveryDate__c,
+                SELECT Id, orders__DeliveryDate__c, orders__AccountId__c,
                        (SELECT Id, orders__Quantity__c, orders__Product2Id__c, orders__OrderLineItemId__c
                         FROM orders__DeliveryLineItems__r)
                 FROM orders__Delivery__c
@@ -108,8 +112,12 @@ public with sharing class OrderCloneUtility {
         for (orders__OrderLineItem__c oli : originalOrderLineItems) {
             orders__OrderLineItem__c clonedOli = new orders__OrderLineItem__c();
             clonedOli.orders__OrderId__c = clonedOrderId;
+            clonedOli.orders__PriceBookId__c = oli.orders__PriceBookId__c;
+            clonedOli.orders__PriceBookLineItemId__c = oli.orders__PriceBookLineItemId__c;
             clonedOli.orders__CatalogId__c = oli.orders__CatalogId__c;
+            clonedOli.orders__CatalogLineItemId__c = oli.orders__CatalogLineItemId__c;
             clonedOli.orders__PromotionId__c = oli.orders__PromotionId__c;
+            clonedOli.orders__PromotionLineItemId__c = oli.orders__PromotionLineItemId__c;
             clonedOli.orders__Product2Id__c = oli.orders__Product2Id__c;
             clonedOli.orders__Quantity__c = isQtysToBeCloned ? oli.orders__Quantity__c : 0;
             clonedOrderLineItems.add(clonedOli);
@@ -133,23 +141,38 @@ public with sharing class OrderCloneUtility {
         List<orders__Delivery__c> clonedDeliveries = new List<orders__Delivery__c>();
         Map<Id, Id> deliveryIdMap = new Map<Id, Id>();
         List<orders__DeliveryLineItem__c> clonedDeliveryLineItems = new List<orders__DeliveryLineItem__c>();
-        Date newBaseDate = Date.today();
-        Date previousOriginalDate = null;
-        Date previousNewDate = newBaseDate;
+    
+        Date today = Date.today();
+        Date earliestPastDate = null;
+        Integer firstShiftDays = 0;
+        
+        for (orders__Delivery__c delivery : originalDeliveries) {
+            if (delivery.orders__DeliveryDate__c < today) {
+                if (earliestPastDate == null || delivery.orders__DeliveryDate__c < earliestPastDate) {
+                    earliestPastDate = delivery.orders__DeliveryDate__c;
+                }
+            }
+        }
+    
+        if (earliestPastDate != null) {
+            firstShiftDays = today.daysBetween(earliestPastDate);
+        }
     
         for (orders__Delivery__c originalDelivery : originalDeliveries) {
             orders__Delivery__c clonedDelivery = new orders__Delivery__c();
             clonedDelivery.orders__OrderId__c = clonedOrderId;
-
+            clonedDelivery.orders__AccountId__c = newAccountId != null ? newAccountId : this.originalOrder.orders__AccountId__c;
+            
+            // Adjust delivery date logic
             if (isDeliveryDatesToBeShifted) {
-                if (previousOriginalDate == null) {
-                    clonedDelivery.orders__DeliveryDate__c = newBaseDate;
+                if (originalDelivery.orders__DeliveryDate__c >= today) {
+                    // Keep future or today dates unchanged
+                    clonedDelivery.orders__DeliveryDate__c = originalDelivery.orders__DeliveryDate__c;
                 } else {
-                    Integer interval = originalDelivery.orders__DeliveryDate__c.daysBetween(previousOriginalDate);
-                    previousNewDate = previousNewDate.addDays(interval);
-                    clonedDelivery.orders__DeliveryDate__c = previousNewDate;
+                    // Shift past dates forward
+                    Integer shiftDays = originalDelivery.orders__DeliveryDate__c.daysBetween(earliestPastDate);
+                    clonedDelivery.orders__DeliveryDate__c = today.addDays(shiftDays);
                 }
-                previousOriginalDate = originalDelivery.orders__DeliveryDate__c;
             } else {
                 clonedDelivery.orders__DeliveryDate__c = originalDelivery.orders__DeliveryDate__c;
             }
@@ -158,13 +181,13 @@ public with sharing class OrderCloneUtility {
         }
     
         if (!clonedDeliveries.isEmpty()) {
-            insert as user clonedDeliveries;
+            insert clonedDeliveries;
             for (Integer i = 0; i < originalDeliveries.size(); i++) {
                 deliveryIdMap.put(originalDeliveries[i].Id, clonedDeliveries[i].Id);
             }
         }
     
-        // Create delivery line items
+        // Clone delivery line items
         if (isQtysToBeCloned) {
             for (orders__Delivery__c originalDelivery : originalDeliveries) {
                 if (originalDelivery.orders__DeliveryLineItems__r != null) {
@@ -182,7 +205,7 @@ public with sharing class OrderCloneUtility {
             }
     
             if (!clonedDeliveryLineItems.isEmpty()) {
-                insert as user clonedDeliveryLineItems;
+                insert clonedDeliveryLineItems;
             }
         }
     }
